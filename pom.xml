@@ -19,6 +19,9 @@
   <description>Simple extensible budgetmanagement</description>
   <url>http://www.japrost.de/java/jabudget</url>
 
+  <modules>
+  	<module>jabudget-domain</module>
+  </modules>
   <properties>
     <japrost.site.locales>de</japrost.site.locales>
   </properties>
