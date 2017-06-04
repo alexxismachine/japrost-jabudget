@@ -1,4 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.japrost.jabudget</groupId>
@@ -6,11 +9,29 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>jabudget-domain</artifactId>
-  
+
   <name>JaBudGet - Domiain</name>
   <description>The domain model of JaBudGet</description>
   <url>http://www.japrost.de/java/jabudget/domain</url>
 
+  <dependencies>
+    <!-- TEST -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.8.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.outsideMyBox</groupId>
+      <artifactId>testUtils</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
   <distributionManagement>
     <site>
       <id>japrostSiteId</id>
