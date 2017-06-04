@@ -8,12 +8,15 @@
     <artifactId>jabudget</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>jabudget-spring-boot</artifactId>
+  <artifactId>jabudget-vaadin-spring</artifactId>
 
-  <name>JaBudGet - Spring Boot</name>
-  <description>The spring boot web application of JaBudGet</description>
-  <url>http://www.japrost.de/java/jabudget/spring-boot</url>
+  <name>JaBudGet - Vaadin Spring</name>
+  <description>The Vaadin web application of JaBudGet backed by Spring</description>
+  <url>http://www.japrost.de/java/jabudget/vaadin-spring</url>
 
+  <properties>
+    <vaadin.version>8.0.5</vaadin.version>
+  </properties>
   <dependencies>
     <!-- INTERNAL -->
     <dependency>
@@ -28,17 +31,28 @@
     </dependency>
     <!-- EXTENAL -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <version>1.5.3.RELEASE</version>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-spring-boot-starter</artifactId>
     </dependency>
-    <!-- TEST -->
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-bom</artifactId>
+        <version>${vaadin.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
   <distributionManagement>
     <site>
       <id>japrostSiteId</id>
       <name>JaProSt-Site</name>
-      <url>${japrost.distribution.site.url}/java/jabudget/spring-boot</url>
+      <url>${japrost.distribution.site.url}/java/jabudget/vaadin-spring</url>
     </site>
   </distributionManagement>
 </project>
