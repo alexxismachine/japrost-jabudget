@@ -7,7 +7,7 @@
   <parent>
     <groupId>de.japrost</groupId>
     <artifactId>japrost-java-parent</artifactId>
-    <version>2-SNAPSHOT</version>
+    <version>2.0</version>
   </parent>
 
   <groupId>de.japrost.jabudget</groupId>
@@ -15,21 +15,24 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>Budgetmanagement</name>
+  <name>JaProst Buddy to Get your financial done</name>
   <description>Simple extensible budgetmanagement</description>
-  <url>${japrost.project.url}/${japrost.site.project.path}/</url>
+  <url>http://www.japrost.de/java/jabudget</url>
 
   <properties>
-    <japrost.site.project.path>java/jabudget</japrost.site.project.path>
     <japrost.site.locales>de</japrost.site.locales>
   </properties>
 
   <distributionManagement>
     <site>
-      <id>${japrost.distribution.site.id}</id>
+      <id>japrostSiteId</id>
       <name>JaProSt-Site</name>
-      <url>${japrost.distribution.site.url}/${japrost.site.project.path}/</url>
+      <url>${japrost.distribution.site.url}/java/jabudget/</url>
     </site>
   </distributionManagement>
-
+  <scm>
+    <developerConnection>scm:git:git://bitbucket.org/daprost/japrost-jbudget</developerConnection>
+    <url>https://bitbucket.org/daprost/japrost-jbudget</url>
+    <tag>HEAD</tag>
+  </scm>
 </project>
