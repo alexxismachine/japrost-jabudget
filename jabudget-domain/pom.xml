@@ -10,7 +10,7 @@
   </parent>
   <artifactId>jabudget-domain</artifactId>
 
-  <name>JaBudGet - Domiain</name>
+  <name>JaBudGet - Domain</name>
   <description>The domain model of JaBudGet</description>
   <url>http://www.japrost.de/java/jabudget/domain</url>
 

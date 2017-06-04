@@ -1,0 +1,37 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>de.japrost.jabudget</groupId>
+    <artifactId>jabudget</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>jabudget-spring-boot</artifactId>
+
+  <name>JaBudGet - Spring Boot</name>
+  <description>The spring boot web application of JaBudGet</description>
+  <url>http://www.japrost.de/java/jabudget/spring-boot</url>
+
+  <dependencies>
+    <!-- INTERNAL -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jabudget-domain</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jabudget-service</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <!-- EXTENAL -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>1.5.3.RELEASE</version>
+    </dependency>
+    <!-- TEST -->
+  </dependencies>
+</project>
