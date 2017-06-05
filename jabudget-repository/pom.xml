@@ -1,0 +1,32 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>de.japrost.jabudget</groupId>
+    <artifactId>jabudget</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>jabudget-repository</artifactId>
+
+  <name>JaBudGet - Repository</name>
+  <description>The repository model of JaBudGet</description>
+  <url>http://www.japrost.de/java/jabudget/repository</url>
+
+  <dependencies>
+    <!-- INTERNAL -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jabudget-domain</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  <distributionManagement>
+    <site>
+      <id>japrostSiteId</id>
+      <name>JaProSt-Site</name>
+      <url>${japrost.distribution.site.url}/java/jabudget/repository</url>
+    </site>
+  </distributionManagement>
+</project>
