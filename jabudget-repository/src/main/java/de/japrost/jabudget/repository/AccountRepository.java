@@ -1,6 +1,5 @@
 package de.japrost.jabudget.repository;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -12,12 +11,13 @@ import de.japrost.jabudget.domain.account.Account;
 public interface AccountRepository {
 
 	/**
-	 * Create a new {@link Account}.
+	 * Create a new {@link Account} with the given values.
 	 * 
 	 * @param account the {@link Account} to create.
+	 * @return The account as stored in the repository.
 	 */
 	// TODO what todo on dublicates?
-	void create(Account account);
+	Account create(Account account);
 
 	/**
 	 * Update an existing {@link Account}.
