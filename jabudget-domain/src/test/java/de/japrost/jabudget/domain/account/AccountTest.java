@@ -2,10 +2,10 @@ package de.japrost.jabudget.domain.account;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.outsideMyBox.testUtils.BeanLikeTester;
@@ -100,13 +100,16 @@ public class AccountTest {
 	@Test
 	public void builder_id_mustNotBeNull() {
 		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> new Account.Builder((String) null).build())
-				.withMessage("'id' MUST NOT be null.");
-		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Account.Builder().build())
 				.withMessage("'id' MUST NOT be null.");
 		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> new Account.Builder((String) null).build())
+				.withMessage("'id' MUST NOT be null.");
+		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Account.Builder("an id").setId(null).build())
+				.withMessage("'id' MUST NOT be null.");
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> new Account.Builder((Account) null).build())
 				.withMessage("'id' MUST NOT be null.");
 	}
 
@@ -152,5 +155,46 @@ public class AccountTest {
 		// then
 		assertThat(actual.getId()).isEqualTo("an id");
 		assertThat(actual.getName()).isEqualTo("a name");
+	}
+
+	/**
+	 * Copy Builder may be null.
+	 */
+	@Test
+	public void builder_Copy_mayBeNull() {
+		// given
+		Account.Builder builder = Account.Builder.builder((Account) null);
+		// when
+		builder.setId("an id").setName("a name");
+		Account actual = builder.build();
+		// then
+		assertThat(actual.getId()).isEqualTo("an id");
+		assertThat(actual.getName()).isEqualTo("a name");
+	}
+
+	/**
+	 * Builder creates empty optional on not all required fields are set. 
+	 */
+	@Test
+	public void builder_optional_empty() {
+		// given
+		Account.Builder builder = Account.Builder.builder((Account) null);
+		// when
+		Optional<Account> actual = builder.buildOptional();
+		// then
+		assertThat(actual).isEmpty();
+	}
+	/**
+	 * Builder creates filled optional on all required fields are set. 
+	 */
+	@Test
+	public void builder_optional_filled() {
+		// given
+		Account.Builder builder = Account.Builder.builder((Account) null);
+		builder.setId("an id");
+		// when
+		Optional<Account> actual = builder.buildOptional();
+		// then
+		assertThat(actual).isNotEmpty();
 	}
 }

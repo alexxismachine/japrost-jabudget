@@ -2,6 +2,8 @@ package de.japrost.jabudget.domain.account;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 /**
  * An account in JaBudGet.<br>
  * The Account is identified by its id.
@@ -123,11 +125,13 @@ public class Account {
 		/**
 		 * Create an account builder by example;
 		 * 
-		 * @param account the example account.
+		 * @param account the example account. MAY BE {@code null}.
 		 */
 		public Builder(Account account) {
-			this.id = account.id;
-			this.name = account.name;
+			if (account != null) {
+				this.id = account.id;
+				this.name = account.name;
+			}
 		}
 
 		/**
@@ -168,6 +172,20 @@ public class Account {
 			Account result = new Account(id);
 			result.name = name;
 			return result;
+		}
+
+		/**
+		 * Build the account if it would be valid.
+		 * 
+		 * @return a new account instance or an empty optional.
+		 */
+		public Optional<Account> buildOptional() {
+			if (id == null) {
+				return Optional.empty();
+			}
+			Account result = new Account(id);
+			result.name = name;
+			return Optional.of(result);
 		}
 
 		/**
