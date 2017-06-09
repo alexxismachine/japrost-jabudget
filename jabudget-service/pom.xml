@@ -17,6 +17,11 @@
       <artifactId>jabudget-domain</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jabudget-repository</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <!-- EXTENAL -->
     <!-- TEST -->
   </dependencies>
