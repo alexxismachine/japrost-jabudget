@@ -22,7 +22,7 @@
   <modules>
   	<module>jabudget-domain</module>
     <module>jabudget-service</module>
-  	<module>jbudget-spring-boot</module>
+  	<module>jabudget-spring-boot</module>
   	<module>jabudget-vaadin-spring</module>
   	<module>jabudget-repository</module>
   </modules>

@@ -3,7 +3,7 @@
   xmlns="http://maven.apache.org/DECORATION/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
-  name="JaProSt JaBudget">
+  name="JaProSt JaBudget Domain">
   <body>
     <breadcrumbs>
       <item
@@ -14,34 +14,16 @@
         href="http://www.japrost.de/java/index.html" />
       <item
         name="JaBudget"
+        href="../index.html" />
+      <item
+        name="JaBudget Domain"
         href="index.html" />
     </breadcrumbs>
 
-    <menu name="JaBudget">
+    <menu name="JaBudget Domain">
       <item
         name="Übersicht"
         href="index.html" />
-    </menu>
-    
-    <menu name="Module">
-      <item
-        name="Übersicht"
-        href="index.html" />
-      <item
-        name="Repository"
-        href="repository/index.html" />
-      <item
-        name="Domain"
-        href="domain/index.html" />
-      <item
-        name="Service"
-        href="service/index.html" />
-      <item
-        name="Spring Boot"
-        href="spring-boot/index.html" />
-      <item
-        name="Vaadin Spring"
-        href="vaadin-spring/index.html" />
     </menu>
     
     <menu
