@@ -37,11 +37,14 @@
         name="Service"
         href="service/index.html" />
       <item
-        name="Spring Boot"
-        href="spring-boot/index.html" />
+        name="Spring Rest"
+        href="spring-rest/index.html" />
       <item
         name="Vaadin Spring"
         href="vaadin-spring/index.html" />
+      <item
+        name="Starter"
+        href="starter/index.html" />
     </menu>
     
     <menu
