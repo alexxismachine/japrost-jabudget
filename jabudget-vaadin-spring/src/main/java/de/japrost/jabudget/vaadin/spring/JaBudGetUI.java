@@ -15,16 +15,21 @@ import com.vaadin.ui.VerticalLayout;
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.service.AccountService;
 
-@SpringUI
+@SpringUI()
 public class JaBudGetUI extends UI {
 
-	private final AccountService accountService;
+	private static final long serialVersionUID = 1L;
+
+	private final transient AccountService accountService;
 	private ListDataProvider<Account> accountData;
 	private Button newAccount;
 	private TextField newId;
 	private TextField newName;
 
 	public JaBudGetUI(final AccountService accountService) {
+		System.out.println("----------");
+		System.out.println("Hier " + accountService);
+		System.out.println("----------");
 		this.accountService = accountService;
 	}
 

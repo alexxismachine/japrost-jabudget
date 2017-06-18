@@ -3,7 +3,7 @@
   xmlns="http://maven.apache.org/DECORATION/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
-  name="JaProSt JaBudget Spring Boot">
+  name="JaProSt JaBudget Spring Rest">
   <body>
     <breadcrumbs>
       <item
@@ -16,11 +16,11 @@
         name="JaBudget"
         href="../index.html" />
       <item
-        name="JaBudget Spring Boot"
+        name="JaBudget Spring Rest"
         href="index.html" />
     </breadcrumbs>
 
-    <menu name="JaBudget Spring Boot">
+    <menu name="JaBudget Spring Rest">
       <item
         name="Übersicht"
         href="index.html" />

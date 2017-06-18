@@ -8,15 +8,16 @@
     <artifactId>jabudget</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>jabudget-vaadin-spring</artifactId>
+  <artifactId>jabudget-starter</artifactId>
 
-  <name>JaBudGet - Vaadin Spring</name>
-  <description>The Vaadin web application of JaBudGet backed by Spring</description>
-  <url>http://www.japrost.de/java/jabudget/vaadin-spring</url>
+  <name>JaBudGet - Starter</name>
+  <description>The starter for JaBudGet</description>
+  <url>http://www.japrost.de/java/jabudget/starter</url>
 
   <properties>
     <vaadin.version>8.0.6</vaadin.version>
   </properties>
+
   <dependencies>
     <!-- INTERNAL -->
     <dependency>
@@ -29,11 +30,32 @@
       <artifactId>jabudget-service</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jabudget-vaadin-spring</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jabudget-spring-rest</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <!-- EXTENAL -->
     <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-spring</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>1.5.3.RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-server</artifactId>
+      <version>${vaadin.version}</version>
+    </dependency>
+    <!-- TEST -->
   </dependencies>
   <dependencyManagement>
     <dependencies>
@@ -46,13 +68,11 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-
   <distributionManagement>
     <site>
       <id>japrostSiteId</id>
       <name>JaProSt-Site</name>
-      <url>${japrost.distribution.site.url}/java/jabudget/vaadin-spring</url>
+      <url>${japrost.distribution.site.url}/java/jabudget/starter</url>
     </site>
   </distributionManagement>
 </project>

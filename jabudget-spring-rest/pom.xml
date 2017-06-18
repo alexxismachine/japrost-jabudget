@@ -8,12 +8,15 @@
     <artifactId>jabudget</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>jabudget-spring-boot</artifactId>
+  <artifactId>jabudget-spring-rest</artifactId>
 
-  <name>JaBudGet - Spring Boot</name>
-  <description>The spring boot web application of JaBudGet</description>
-  <url>http://www.japrost.de/java/jabudget/spring-boot</url>
+  <name>JaBudGet - Spring Rest</name>
+  <description>The spring rest web application of JaBudGet</description>
+  <url>http://www.japrost.de/java/jabudget/spring-rest</url>
 
+  <properties>
+    <spring.version>4.3.8.RELEASE</spring.version>
+  </properties>
   <dependencies>
     <!-- INTERNAL -->
     <dependency>
@@ -28,17 +31,27 @@
     </dependency>
     <!-- EXTENAL -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <version>1.5.3.RELEASE</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
     </dependency>
     <!-- TEST -->
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-framework-bom</artifactId>
+        <version>${spring.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <distributionManagement>
     <site>
       <id>japrostSiteId</id>
       <name>JaProSt-Site</name>
-      <url>${japrost.distribution.site.url}/java/jabudget/spring-boot</url>
+      <url>${japrost.distribution.site.url}/java/jabudget/spring-rest</url>
     </site>
   </distributionManagement>
 </project>

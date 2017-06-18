@@ -1,4 +1,4 @@
-package de.japrost.jabudget.vaadin.spring.config;
+package de.japrost.jabudget.starter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

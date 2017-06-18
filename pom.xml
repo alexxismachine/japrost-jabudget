@@ -22,9 +22,10 @@
   <modules>
   	<module>jabudget-domain</module>
     <module>jabudget-service</module>
-  	<module>jabudget-spring-boot</module>
+  	<module>jabudget-spring-rest</module>
   	<module>jabudget-vaadin-spring</module>
   	<module>jabudget-repository</module>
+  	<module>jabudget-starter</module>
   </modules>
   <properties>
     <japrost.site.locales>de</japrost.site.locales>
