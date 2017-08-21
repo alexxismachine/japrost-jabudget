@@ -6,6 +6,9 @@
  
 JaBudget Starter
 
-  JaBudget Starter bildet die unterschiedlichen Start-Konfigurationen ab.   
-
+  JaBudget Starter bildet die unterschiedlichen Start-Konfigurationen ab.
   
+  Die Klasse <<<de.japrost.jabudget.starter.JaBudGetStarter>>> startet sowohl die 
+  {{{../vaadin-spring/index.html}Vaadin-Spring-}} als auch die 
+  {{{../spring-rest/index.html}Spring-Rest-Implementierung}}
+  gegen ein In-Memory-Repository.

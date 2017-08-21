@@ -15,6 +15,9 @@ import com.vaadin.ui.VerticalLayout;
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.service.AccountService;
 
+/**
+ * Main UI for JaBudget.
+ */
 @SpringUI()
 public class JaBudGetUI extends UI {
 
@@ -26,13 +29,19 @@ public class JaBudGetUI extends UI {
 	private TextField newId;
 	private TextField newName;
 
+	/**
+	 * Instaciate with all dependencies.
+	 * 
+	 * @param accountService the {@link AccountService} to use.
+	 */
 	public JaBudGetUI(final AccountService accountService) {
-		System.out.println("----------");
-		System.out.println("Hier " + accountService);
-		System.out.println("----------");
 		this.accountService = accountService;
 	}
 
+	/**
+	 * {@inheritDoc}<p>
+	 * <strong>This implementation</strong> initializes all there currently is available (a SPA with a single page ;-).
+	 */
 	@Override
 	protected void init(final VaadinRequest request) {
 		final HorizontalLayout mainLayout = new HorizontalLayout();

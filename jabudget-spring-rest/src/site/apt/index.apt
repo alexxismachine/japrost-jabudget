@@ -6,6 +6,10 @@
  
 JaBudget Spring Rest
 
-  JaBudget Spring Rest exponiert die Business Services als Rest-Schnittstelle.   
-
+  JaBudget Spring Rest exponiert die Business Services als Rest-Schnittstelle.
   
+  Die Controller sind unter <<</rest/>>> zu erreichen.
+
+* AccountContoller
+
+  Anzeigen eines einzelnen Accounts anhand seiner id: <<<account/\{id\}>>>
