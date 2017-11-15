@@ -6,6 +6,9 @@
     <release
       version="0.0.1"
       description="bootstrap">
+      <action type="update">
+        Use Java 9.
+      </action>
       <action type="add">
         Initial Version.
       </action>

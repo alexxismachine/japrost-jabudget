@@ -27,8 +27,13 @@
   	<module>jabudget-repository</module>
   	<module>jabudget-starter</module>
   </modules>
+  
   <properties>
     <japrost.site.locales>de</japrost.site.locales>
+    <java.source.version>9</java.source.version>
+    <java.target.version>9</java.target.version>
+    <version.jacoco-maven-plugin>0.7.9</version.jacoco-maven-plugin>
+    <japrost.qa.version>1.0</japrost.qa.version>
   </properties>
 
   <distributionManagement>
