@@ -6,7 +6,7 @@ import java.util.Set;
 import de.japrost.jabudget.domain.account.Account;
 
 /**
- * The repostitory for {@link Account}s,
+ * The repository for {@link Account}s,
  */
 public interface AccountRepository {
 
@@ -15,16 +15,16 @@ public interface AccountRepository {
 	 * 
 	 * @param account the {@link Account} to create.
 	 * @return The account as stored in the repository.
+	 * @throws PersistenceException with {@link PersistenceFailure#DUPLICATE_ENTITY}
 	 */
-	// TODO what todo on dublicates?
-	Account create(Account account);
+	Account create(Account account) throws PersistenceException;
 
 	/**
 	 * Update an existing {@link Account}.
 	 * 
 	 * @param account the {@link Account} to update.
 	 */
-	// TODO what todo on not found?
+	// TODO what on not found?
 	void update(Account account);
 
 	/**
@@ -48,6 +48,6 @@ public interface AccountRepository {
 	 * 
 	 * @param account the {@link Account} to delete.
 	 */
-	// TODO what todo on not found?
+	// TODO what on not found?
 	void delete(Account account);
 }

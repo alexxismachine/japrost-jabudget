@@ -13,6 +13,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import de.japrost.jabudget.domain.account.Account;
+import de.japrost.jabudget.repository.PersistenceException;
 import de.japrost.jabudget.service.AccountService;
 
 /**
@@ -30,7 +31,7 @@ public class JaBudGetUI extends UI {
 	private TextField newName;
 
 	/**
-	 * Instaciate with all dependencies.
+	 * Instantiate with all dependencies.
 	 * 
 	 * @param accountService the {@link AccountService} to use.
 	 */
@@ -39,7 +40,8 @@ public class JaBudGetUI extends UI {
 	}
 
 	/**
-	 * {@inheritDoc}<p>
+	 * {@inheritDoc}
+	 * <p>
 	 * <strong>This implementation</strong> initializes all there currently is available (a SPA with a single page ;-).
 	 */
 	@Override
@@ -81,8 +83,13 @@ public class JaBudGetUI extends UI {
 	}
 
 	private void createNewAccount(final Button.ClickEvent event) {
-		final Account newAccount = accountService
-				.create(Account.Builder.builder(newId.getValue()).setName(newName.getValue()).build());
+		Account newAccount;
+		try {
+			newAccount = accountService.create(Account.Builder.builder(newId.getValue()).setName(newName.getValue()).build());
+		} catch (PersistenceException e) {
+			// FIXME show error message
+			return;
+		}
 		newId.clear();
 		newName.clear();
 		accountData.getItems().add(newAccount);

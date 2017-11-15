@@ -5,6 +5,7 @@ import java.util.List;
 
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.repository.AccountRepository;
+import de.japrost.jabudget.repository.PersistenceException;
 
 /**
  * Business service for {@link Account}s.
@@ -14,7 +15,7 @@ public class AccountService {
 	private final AccountRepository accountRepository;
 
 	/**
-	 * Initalize with all dependencies.
+	 * Initialize with all dependencies.
 	 * 
 	 * @param accountRepository the {@link AccountRepository} to use.
 	 */
@@ -27,9 +28,9 @@ public class AccountService {
 	 * 
 	 * @param account the Account to be created
 	 * @return the new Account.
+	 * @throws PersistenceException when the Account already exists.
 	 */
-	public Account create(final Account account) {
-		// TODO throw a business exception on duplicate account
+	public Account create(final Account account) throws PersistenceException {
 		return accountRepository.create(account);
 	}
 
