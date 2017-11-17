@@ -17,7 +17,7 @@ public interface AccountRepository {
 	 * 
 	 * @param account the {@link Account} to create.
 	 * @return The account as stored in the repository.
-	 * @throws DomainException with {@link DomainFailure#DUPLICATE_ENTITY}
+	 * @throws DomainException with {@link DomainFailure#DUPLICATE_ENTITY} if the given account already exists.
 	 */
 	Account create(Account account) throws DomainException;
 
@@ -25,9 +25,10 @@ public interface AccountRepository {
 	 * Update an existing {@link Account}.
 	 * 
 	 * @param account the {@link Account} to update.
+	 * @return The account as stored in the repository.
+	 * @throws DomainException with {@link DomainFailure#MISSING_ENTITY} if the given account does not exist.
 	 */
-	// TODO what on not found?
-	void update(Account account);
+	Account update(Account account) throws DomainException;
 
 	/**
 	 * Find an {@link Account} by id.

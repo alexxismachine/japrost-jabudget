@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,7 +55,7 @@ public class AccountController {
 	}
 
 	/**
-	 * Create a new Account
+	 * Create a new Account.
 	 * 
 	 * @param account the account to create
 	 * @return the new account
@@ -64,4 +65,20 @@ public class AccountController {
 	public Account create(@RequestBody Account.Builder account) throws DomainException {
 		return accountService.create(account.build());
 	}
+
+	/**
+	 * Update an existing Account.
+	 * 
+	 * @param id the id to look for
+	 * @param account the account to update. The id from the account is ignored.
+	 * @return the updated account
+	 * @throws DomainException if creating fails
+	 */
+	@PutMapping(path = "/account/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Account update(@PathVariable("id") final String id, @RequestBody Account.Builder account)
+			throws DomainException {
+		account.setId(id);
+		return accountService.update(account.build());
+	}
+
 }

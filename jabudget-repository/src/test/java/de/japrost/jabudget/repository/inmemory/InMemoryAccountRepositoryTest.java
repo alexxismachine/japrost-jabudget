@@ -73,4 +73,37 @@ public class InMemoryAccountRepositoryTest {
 			cut.create(account);
 		}).matches(p -> p.getFailure() == DomainFailure.DUPLICATE_ENTITY);
 	}
+
+	/**
+	 * Update updates.
+	 * 
+	 * @throws Exception never
+	 */
+	@Test
+	public void update_updates() throws Exception {
+		// given
+		Account account = Account.Builder.builder("an id").build();
+		cut.create(account);
+		account.setName("a name");
+		// when
+		cut.update(account);
+		// then 
+		Account actual = cut.findById("an id").get();
+		assertThat(actual.getName()).isEqualTo("a name");
+	}
+
+	/**
+	 * Missing throws Exception.
+	 * 
+	 * @throws Exception never
+	 */
+	@Test
+	public void update_doesNotStoreMissing() throws Exception {
+		// given
+		Account account = Account.Builder.builder("an id").build();
+		// when then
+		Assertions.assertThatExceptionOfType(DomainException.class).isThrownBy(() -> {
+			cut.update(account);
+		}).matches(p -> p.getFailure() == DomainFailure.MISSING_ENTITY);
+	}
 }

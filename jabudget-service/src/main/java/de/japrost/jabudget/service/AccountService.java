@@ -35,6 +35,17 @@ public class AccountService {
 	}
 
 	/**
+	 * Update an existing {@link Account}.
+	 * 
+	 * @param account the Account to be updated
+	 * @return the updated Account.
+	 * @throws DomainException when the Account does not exist.
+	 */
+	public Account update(final Account account) throws DomainException {
+		return accountRepository.update(account);
+	}
+
+	/**
 	 * Retrieve all accounts.
 	 * 
 	 * @return all available accounts.

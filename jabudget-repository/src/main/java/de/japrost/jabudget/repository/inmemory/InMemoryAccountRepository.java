@@ -28,20 +28,27 @@ public class InMemoryAccountRepository implements AccountRepository {
 		if (storage.containsKey(account.getId())) {
 			throw new DomainException(DomainFailure.DUPLICATE_ENTITY);
 		}
-		Account accountToStore = new Account.Builder(account).build();
-		storage.put(account.getId(), accountToStore);
-		return new Account.Builder(account).build();
+		return putInStoreDefensively(account);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * <p>
-	 * <strong>This implementation</strong> does nothing.
+	 * <strong>This implementation</strong> stores and gives defensive copies of the given account.
 	 */
 	@Override
-	public void update(Account account) {
-		// TODO Auto-generated method stub
+	public Account update(Account account) throws DomainException {
+		if (!storage.containsKey(account.getId())) {
+			throw new DomainException(DomainFailure.MISSING_ENTITY);
+		}
+		return putInStoreDefensively(account);
 
+	}
+
+	private Account putInStoreDefensively(Account account) {
+		Account accountToStore = new Account.Builder(account).build();
+		storage.put(account.getId(), accountToStore);
+		return new Account.Builder(account).build();
 	}
 
 	/**

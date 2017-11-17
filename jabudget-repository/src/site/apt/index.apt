@@ -8,4 +8,28 @@ JaBudget Repository
 
   JaBudget Repsoitory definiert die Schnittstelle zu Persistenzsystemen.   
 
+* AccountRepository
+
+** create
+  
+  Persistiert eine neue Instanz eines Entities.
+  
+  Gibt das persistierte Objekt zurück, falls beim Persistieren Daten geändert werden.
+  Stateless Clients bekommen damit wieder eine Referenz zum Weiterarbeiten.
+  <TODO> ist Rückgabe wirklich notwendig und hilfreich?
+  
+  Wirft eine DomainException mit DomainFailure DUPLICATE_ENTITY
+  falls ein Entity mit gleicher ID existiert.
+  
+** update
+  
+  Aktualisiert eine bestehende Instanz eines Entities.
+  
+  Gibt das persistierte Objekt zurück, falls beim Persistieren Daten geändert werden.
+  Stateless Clients bekommen damit wieder eine Referenz zum Weiterarbeiten.
+  <TODO> ist Rückgabe wirklich notwendig und hilfreich?
+  
+  Wirft eine DomainException mit DomainFailure MISSING_ENTITY
+  falls ein Entity mit gegebener ID nicht existiert.
+  
   
