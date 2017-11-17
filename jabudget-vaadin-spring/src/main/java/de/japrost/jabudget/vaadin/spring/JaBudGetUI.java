@@ -12,8 +12,8 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import de.japrost.jabudget.domain.DomainException;
 import de.japrost.jabudget.domain.account.Account;
-import de.japrost.jabudget.repository.PersistenceException;
 import de.japrost.jabudget.service.AccountService;
 
 /**
@@ -86,7 +86,7 @@ public class JaBudGetUI extends UI {
 		Account newAccount;
 		try {
 			newAccount = accountService.create(Account.Builder.builder(newId.getValue()).setName(newName.getValue()).build());
-		} catch (PersistenceException e) {
+		} catch (DomainException e) {
 			// FIXME show error message
 			return;
 		}

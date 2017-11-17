@@ -3,9 +3,9 @@ package de.japrost.jabudget.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.japrost.jabudget.domain.DomainException;
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.repository.AccountRepository;
-import de.japrost.jabudget.repository.PersistenceException;
 
 /**
  * Business service for {@link Account}s.
@@ -28,9 +28,9 @@ public class AccountService {
 	 * 
 	 * @param account the Account to be created
 	 * @return the new Account.
-	 * @throws PersistenceException when the Account already exists.
+	 * @throws DomainException when the Account already exists.
 	 */
-	public Account create(final Account account) throws PersistenceException {
+	public Account create(final Account account) throws DomainException {
 		return accountRepository.create(account);
 	}
 

@@ -1,13 +1,13 @@
-package de.japrost.jabudget.repository;
+package de.japrost.jabudget.domain;
 
 /**
- * Thrown on exceptions in repositories.
+ * Thrown on exceptions handling the domain.
  */
 // TODO generate messages 
-public class PersistenceException extends Exception {
+public class DomainException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	private final PersistenceFailure failure;
+	private final DomainFailure failure;
 
 	/**
 	 * Create an instance based on a {@link Throwable}.
@@ -15,8 +15,8 @@ public class PersistenceException extends Exception {
 	 * @param failure the failure code
 	 * @param cause the cause of the failure
 	 */
-	public PersistenceException(PersistenceFailure failure, Throwable cause) {
-		super(cause);
+	public DomainException(DomainFailure failure, Throwable cause) {
+		super(failure.toString(), cause);
 		this.failure = failure;
 	}
 
@@ -25,8 +25,8 @@ public class PersistenceException extends Exception {
 	 * 
 	 * @param failure the failure code
 	 */
-	public PersistenceException(PersistenceFailure failure) {
-		super();
+	public DomainException(DomainFailure failure) {
+		super(failure.toString());
 		this.failure = failure;
 	}
 
@@ -35,7 +35,7 @@ public class PersistenceException extends Exception {
 	 * 
 	 * @return the code
 	 */
-	public PersistenceFailure getFailure() {
+	public DomainFailure getFailure() {
 		return failure;
 	}
 

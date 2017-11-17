@@ -12,4 +12,6 @@ JaBudget Spring Rest
 
 * AccountContoller
 
-  Anzeigen eines einzelnen Accounts anhand seiner id: <<<account/\{id\}>>>
+  Anzeigen aller Accounts: <<<accounts/>>>
+
+  Anzeigen eines einzelnen Accounts anhand seiner id: <<<accounts/\{id\}>>>

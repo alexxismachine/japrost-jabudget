@@ -6,9 +6,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.japrost.jabudget.domain.DomainException;
+import de.japrost.jabudget.domain.DomainFailure;
 import de.japrost.jabudget.domain.account.Account;
-import de.japrost.jabudget.repository.PersistenceException;
-import de.japrost.jabudget.repository.PersistenceFailure;
 
 /**
  * Test the {@link InMemoryAccountRepository}.
@@ -69,8 +69,8 @@ public class InMemoryAccountRepositoryTest {
 		Account account = Account.Builder.builder("an id").build();
 		cut.create(account);
 		// when then
-		Assertions.assertThatExceptionOfType(PersistenceException.class).isThrownBy(() -> {
+		Assertions.assertThatExceptionOfType(DomainException.class).isThrownBy(() -> {
 			cut.create(account);
-		}).matches(p -> p.getFailure() == PersistenceFailure.DUPLICATE_ENTITY);
+		}).matches(p -> p.getFailure() == DomainFailure.DUPLICATE_ENTITY);
 	}
 }

@@ -3,6 +3,8 @@ package de.japrost.jabudget.repository;
 import java.util.Optional;
 import java.util.Set;
 
+import de.japrost.jabudget.domain.DomainException;
+import de.japrost.jabudget.domain.DomainFailure;
 import de.japrost.jabudget.domain.account.Account;
 
 /**
@@ -15,9 +17,9 @@ public interface AccountRepository {
 	 * 
 	 * @param account the {@link Account} to create.
 	 * @return The account as stored in the repository.
-	 * @throws PersistenceException with {@link PersistenceFailure#DUPLICATE_ENTITY}
+	 * @throws DomainException with {@link DomainFailure#DUPLICATE_ENTITY}
 	 */
-	Account create(Account account) throws PersistenceException;
+	Account create(Account account) throws DomainException;
 
 	/**
 	 * Update an existing {@link Account}.
