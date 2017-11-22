@@ -7,11 +7,43 @@
 JaBudget Spring Rest
 
   JaBudget Spring Rest exponiert die Business Services als Rest-Schnittstelle.
+  Das Datenformat ist <<<application/json>>>.
   
-  Die Controller sind unter <<</rest/>>> zu erreichen.
+  Die Controller sind unter <<</rest>>> zu erreichen.
+  
+  (TODO: alle Exceptions fangen und in "Server-Errors" umwandlen.)
 
 * AccountContoller
 
-  Anzeigen aller Accounts: <<<accounts/>>>
+** Entitäten ändern
 
-  Anzeigen eines einzelnen Accounts anhand seiner id: <<<accounts/\{id\}>>>
+*** <<<POST>>> <<</accounts>>>
+
+  Erstellen eines Accounts.
+  Liefert die erstellte Entität zurück.
+  Ist die Entität bereits vorhanden wird der HttpStatus <<<422>>> zurückgeliefert.
+  
+*** <<<PUT>>> <<</accounts/\{id}>>>
+
+  Update eines Accounts.
+  Die im Account enthaltene <<<id>>> wird ignoriert.
+  Ist die Entität nicht vorhanden wird der HttpStatus <<<404>>> zurückgeliefert.
+
+** Entitäten lesen
+
+*** <<<GET>>> <<</accounts>>>
+
+  Anzeigen vorhandener aller Accounts.
+  Sind keine Accounts vorhanden wird eine leere Liste zurückgeliefert.
+  
+*** <<<GET>>> <<<accounts/\{id}>>>
+  
+  Anzeigen eines einzelnen Accounts anhand seiner <<<id>>>.
+  Ist dieser Account nicht vorhanden wird der HttpStatus <<<204>>> zurückgeliefert.
+  
+* RestExceptionHandler
+
+** Verarbeiten einer DomainException
+
+  Mapping der DomainFailure in HttpStatusCodes.
+  Unbekannte DomainFailures werden in <<<500>>> gemapped.

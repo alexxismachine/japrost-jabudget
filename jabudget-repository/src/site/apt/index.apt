@@ -10,26 +10,49 @@ JaBudget Repository
 
 * AccountRepository
 
-** create
+** Entitäten ändern
+
+  Ein grundlegendes Konzept ist, dass die geänderten Daten wieder zurückgeliefert werden,
+  damit der Client eine Referenz zum Weiterarbeiten hat,
+  ohne eine neue Anfrage machen zu müssen.
   
-  Persistiert eine neue Instanz eines Entities.
-  
-  Gibt das persistierte Objekt zurück, falls beim Persistieren Daten geändert werden.
-  Stateless Clients bekommen damit wieder eine Referenz zum Weiterarbeiten.
   <TODO> ist Rückgabe wirklich notwendig und hilfreich?
+
+  Beim Ändern von Enitäten wird davon ausgegangen, dass der Client sich bewusst für eine Entität zum Ändern entschieden hat. 
+  Ist diese nun nicht im Zustand, dass sie geändert werden kann, ist dies ein "Fehler", der über das Werfen einer Ausnahme mitgeteilt wird. 
+  Der Client wir über die Ausnhame "gezwungen" sich mit der Möglichkeit des falschen Zustands auseinander zu setzen.
+
+*** create
+  
+  Persistiert eine neue Instanz eines Entities. 
+  Gibt das persistierte Objekt zurück.
   
   Wirft eine DomainException mit DomainFailure DUPLICATE_ENTITY
   falls ein Entity mit gleicher ID existiert.
   
-** update
+*** update
   
   Aktualisiert eine bestehende Instanz eines Entities.
-  
-  Gibt das persistierte Objekt zurück, falls beim Persistieren Daten geändert werden.
-  Stateless Clients bekommen damit wieder eine Referenz zum Weiterarbeiten.
-  <TODO> ist Rückgabe wirklich notwendig und hilfreich?
+  Gibt das persistierte Objekt zurück.
   
   Wirft eine DomainException mit DomainFailure MISSING_ENTITY
   falls ein Entity mit gegebener ID nicht existiert.
   
+** Entitäten lesen
+
+  Beim Lesen von Entitäten besteht immer die Möglichkeit, dass die gesuchte(n) Enität(en) nicht existieren.
+  Dies ist kein Ausnahmefall, daher wird dafür keine Ausnahme geworfen, sondern eine leere Antwort gegeben. 
+  
+** findAll
+
+  Liefert ein Set mit allen vorhandenen Entities zurück.
+  Die Entities haben keine natürliche Ordnung und es gibt keine doppelten Entitäten, daher wird ein Set verwendet.
+  Sind keine Entitäten vorhanden, wird ein leeres Set zurückgeliefert.
+  
+  <TODO> Einschränkung auf eine maximale Anzahl?
+  
+** findById
+
+  Liefert eine einzelne Entität anhand ihrer Id zurück.
+  Wird unter der Id keine Entität gefunden, ist das gelieferte Optional leer.
   

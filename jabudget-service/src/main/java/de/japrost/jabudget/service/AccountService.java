@@ -2,6 +2,7 @@ package de.japrost.jabudget.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import de.japrost.jabudget.domain.DomainException;
 import de.japrost.jabudget.domain.account.Account;
@@ -58,10 +59,10 @@ public class AccountService {
 	 * Retrieve a single {@link Account} by its id.
 	 * 
 	 * @param id the id of the {@link Account}.
-	 * @return the found {@link Account}.
+	 * @return the {@link Account} with the id. An empty {@link Optional} if no {@link Account} is available for the given
+	 *         id.
 	 */
-	public Account retrieveById(final String id) {
-		// TODO throw a business exception on missing account
-		return accountRepository.findById(id).get();
+	public Optional<Account> retrieveById(final String id) {
+		return accountRepository.findById(id);
 	}
 }

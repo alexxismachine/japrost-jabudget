@@ -1,6 +1,7 @@
 package de.japrost.jabudget.spring;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.japrost.jabudget.domain.DomainException;
+import de.japrost.jabudget.domain.DomainFailure;
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.service.AccountService;
 
@@ -48,10 +50,13 @@ public class AccountController {
 	 * 
 	 * @param id the id to look for
 	 * @return the found {@link Account}
+	 * @throws DomainException if finding fails
 	 */
 	@GetMapping("/accounts/{id}")
-	public Account retrieveById(@PathVariable("id") final String id) {
-		return accountService.retrieveById(id);
+	public Account retrieveById(@PathVariable("id") final String id) throws DomainException {
+		Optional<Account> account = accountService.retrieveById(id);
+		// TODO do not use DomainException in Controller.
+		return account.orElseThrow(() -> new DomainException(DomainFailure.ENTITY_NOT_AVAILABLE));
 	}
 
 	/**
@@ -74,7 +79,7 @@ public class AccountController {
 	 * @return the updated account
 	 * @throws DomainException if creating fails
 	 */
-	@PutMapping(path = "/account/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/accounts/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Account update(@PathVariable("id") final String id, @RequestBody Account.Builder account)
 			throws DomainException {
 		account.setId(id);
