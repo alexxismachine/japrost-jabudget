@@ -10,17 +10,37 @@ JaBudget Repository
 
 * AccountRepository
 
-** Entitäten ändern
+** Entitäten erzeugen / ändern
 
   Ein grundlegendes Konzept ist, dass die geänderten Daten wieder zurückgeliefert werden,
   damit der Client eine Referenz zum Weiterarbeiten hat,
   ohne eine neue Anfrage machen zu müssen.
   
-  <TODO> ist Rückgabe wirklich notwendig und hilfreich?
+  <Alternativen>
+   
+    * Es wird nichts zurückgegeben: Der Client kann sich die Daten über die zum Anlegen gewählte ID holen.
+      Dies spart den Transfer (Verringerung des Datenvolumens), wenn der Client "fire and forget" macht. 
+      Bedeutet eine zusätzliche Anfrage (Erhöhung der Verarbeitungsdauer), wenn der Client das Ergebnis bekommen möchte.
+    
+    * Es wird nur die ID zurückgegeben: Da die ID clientseitig erzeugt wird, kein signifikanter Unterschied zum oberen Punkt.
+    
+    * Der Client teilt mit, ob er ein Ergebnis erwartet (z.B. über ein Request-Objekt / eine separate <<<void>>> Methode).
+      Dies erhöht den Implementierungsaufwand und verschiebt die Verantwortung in Richtung des Clients.   
 
-  Beim Ändern von Enitäten wird davon ausgegangen, dass der Client sich bewusst für eine Entität zum Ändern entschieden hat. 
+  Beim Ändern von Entitäten wird davon ausgegangen, dass der Client sich bewusst für eine Entität zum Ändern entschieden hat. 
   Ist diese nun nicht im Zustand, dass sie geändert werden kann, ist dies ein "Fehler", der über das Werfen einer Ausnahme mitgeteilt wird. 
-  Der Client wir über die Ausnhame "gezwungen" sich mit der Möglichkeit des falschen Zustands auseinander zu setzen.
+  Der Client wird über die Ausnhame "gezwungen" sich mit der Möglichkeit des falschen Zustands auseinander zu setzen.
+  
+  <Alternativen>
+   
+    * Da beim Ändern das geänderte Objekt zurückgegeben wird, kann bei fehlerhaftem Zustand das korrekte Objekt bzw. ein leeres Objekt zurückgegeben werden.
+      Dies verschiebt die Verantwortung in Richtung des Clients sich um den <impliziten> Fehler zu kümmern.
+      
+    * An Stelle der Ausnahme wird mit einem Response-Objekt gearbeitet. 
+      Dieses enthält zu.B. einen Rückgabewert und gegebenenfalls die Entität.
+      Eine einfacheste Version kann auch mit einem <Optional> arbeiten und über die Abwesenheit der Entität <implizit> mitteilen, 
+      dass irgendein Fehler aufgetreten ist.
+      Ein Response-Objekt vermeidet das "Durchreichen" von Checked-Exceptions bzw. das Dokumentieren von möglichen Unchecked-Exceptions.
 
 *** create
   
@@ -30,6 +50,8 @@ JaBudget Repository
   Wirft eine DomainException mit DomainFailure DUPLICATE_ENTITY
   falls ein Entity mit gleicher ID existiert.
   
+~~ TODO createAll - Massenanlegen?
+  
 *** update
   
   Aktualisiert eine bestehende Instanz eines Entities.
@@ -38,21 +60,32 @@ JaBudget Repository
   Wirft eine DomainException mit DomainFailure MISSING_ENTITY
   falls ein Entity mit gegebener ID nicht existiert.
   
+~~ TODO updateAll - Massenänderung?
+  
 ** Entitäten lesen
 
   Beim Lesen von Entitäten besteht immer die Möglichkeit, dass die gesuchte(n) Enität(en) nicht existieren.
   Dies ist kein Ausnahmefall, daher wird dafür keine Ausnahme geworfen, sondern eine leere Antwort gegeben. 
   
-** findAll
+  <Alternativen>
+  
+    * Bei potentiell großen Mengen zum lesen von Enitäten kann die Ergebnismenge nicht dem gewünschten entsprechen.
+      Eine Einschränkung auf eine maximale Anzahl, seitenweise Abfrage oder Segmentierung kann die Ergebnismenge einschränken.
+      
+    * Anstelle der (potentiell) leeren Antwort kann ein Response-Objekt zurückgegeben werden, 
+      welches gegebenenfalls auch weitere Informationen z.B. zur Gesamtmenge oder Seitenanzahl beim Lesen von Mengen liefern kann.
+  
+*** findAll
 
   Liefert ein Set mit allen vorhandenen Entities zurück.
   Die Entities haben keine natürliche Ordnung und es gibt keine doppelten Entitäten, daher wird ein Set verwendet.
   Sind keine Entitäten vorhanden, wird ein leeres Set zurückgeliefert.
   
-  <TODO> Einschränkung auf eine maximale Anzahl?
-  
-** findById
+*** findById
 
   Liefert eine einzelne Entität anhand ihrer Id zurück.
   Wird unter der Id keine Entität gefunden, ist das gelieferte Optional leer.
   
+~~ TODO spezifische finder 
+
+~~ TODO wo bringe ich autocomplete Requests unter. auch in diesem Repository oder gibt es dafür spezielle (weil auch das Backend dann wahrscheinlich speziell ist?
