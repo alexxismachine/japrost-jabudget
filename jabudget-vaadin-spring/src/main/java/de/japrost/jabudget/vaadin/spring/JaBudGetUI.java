@@ -28,8 +28,10 @@ public class JaBudGetUI extends UI {
 
 	private final transient AccountService accountService;
 	private ListDataProvider<Account> accountData;
+	private Account selectedAccount;
 	private Button newAccount;
 	private Button clear;
+	private Button delete;
 	private TextField newId;
 	private TextField newName;
 
@@ -53,7 +55,7 @@ public class JaBudGetUI extends UI {
 		this.setContent(mainLayout);
 		mainLayout.setSizeFull();
 		mainLayout.addComponent(initAccountOverview());
-		mainLayout.addComponent(initNewAccountForm());
+		mainLayout.addComponent(initAccountForm());
 	}
 
 	private VerticalLayout initAccountOverview() {
@@ -69,13 +71,14 @@ public class JaBudGetUI extends UI {
 	}
 
 	private void itemClicked(ItemClick<Account> e) {
-		Account account = e.getItem();
-		newId.setValue(account.getId());
-		newName.setValue(account.getName());
+		selectedAccount = e.getItem();
+		newId.setValue(selectedAccount.getId());
+		newName.setValue(selectedAccount.getName());
 		newAccount.setCaption("Update");
+		delete.setEnabled(true);
 	}
 
-	private FormLayout initNewAccountForm() {
+	private FormLayout initAccountForm() {
 		final FormLayout newAccountLayout = new FormLayout();
 		newId = new TextField();
 		newId.setCaption("id");
@@ -95,6 +98,11 @@ public class JaBudGetUI extends UI {
 		clear.setEnabled(false);
 		clear.addClickListener(this::clearAccount);
 		newAccountLayout.addComponent(clear);
+		delete = new Button();
+		delete.setCaption("Delete");
+		delete.setEnabled(false);
+		delete.addClickListener(this::deleteAccount);
+		newAccountLayout.addComponent(delete);
 		return newAccountLayout;
 	}
 
@@ -102,6 +110,18 @@ public class JaBudGetUI extends UI {
 		newId.clear();
 		newName.clear();
 		newAccount.setCaption("New");
+	}
+
+	private void deleteAccount(final Button.ClickEvent event) {
+		Boolean erased = accountService.erase(newId.getValue());
+		if (erased) {
+			accountData.getItems().remove(selectedAccount);
+			accountData.refreshAll();
+			// clear after remove since the newIdValueChanged is faster and sets selectedAccount to null
+			newId.clear();
+			newName.clear();
+			newAccount.setCaption("New");
+		}
 	}
 
 	private void createNewAccount(final Button.ClickEvent event) {
@@ -130,6 +150,8 @@ public class JaBudGetUI extends UI {
 		if (event.getValue().length() == 0) {
 			newAccount.setEnabled(false);
 			clear.setEnabled(false);
+			delete.setEnabled(false);
+			selectedAccount = null;
 		} else {
 			newAccount.setEnabled(true);
 			clear.setEnabled(true);

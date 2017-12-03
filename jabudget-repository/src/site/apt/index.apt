@@ -1,14 +1,37 @@
   -----
-  JaBudget  Repository - Java Programming Studio
+  JaBudget Repository - Java Programming Studio
   -----
   alexxismachine
   -----
  
 JaBudget Repository
 
-  JaBudget Repsoitory definiert die Schnittstelle zu Persistenzsystemen.   
+  JaBudget Repsoitory definiert die Schnittstelle zu Persistenzsystemen.
+  
+~~ Dokumentation InMemoryAccountRepository -> eigenes Java 9 Modul?
+
+~~ Factory (ServiceProvider) für konkrete AccountRepositories
 
 * AccountRepository
+
+  Um die Schnittstelle einfach zu halten, bezieht sich das Erzeugen / Ändern / Löschen von Entitäten immer auf eine Entität.
+  
+  <Alternativen>
+  
+    * Es gibt Methoden zum Beeinflussen von mehreren Entitäten auf einmal. 
+      Dabei wird ein Response-Objekt Konzept notwendig, da innerhalb einer Aktion sowohl Fehler als auch Erfolg möglich sind.
+
+  Das Repository geht immer davon aus, dass valide Entitäten geliefert werden.
+  Werden nicht valide Entitäten geliefert, darf das Repository eine (beliebige?) RuntimeException werfen.
+  
+  <Alternativen>
+  
+    * Bei nicht validen Entitäten wird eine konkrete RuntimeException geworfen,
+      die auch Fehler-Information enthält. 
+      Um den Client noch stärker zu involvieren könnte auch eine CheckedException verwendet werden.
+      
+    * Bei der Verwendung eines Response-Objekt Konzepts kann anstelle der Exception ein einfacherers Fehlerobjekt verwendet werden,
+      da bei Validierungsfehlern nur die Ursache, aber nicht der Ort der Validierung (Stacktrace) relevant ist. 
 
 ** Entitäten erzeugen / ändern
 
@@ -50,7 +73,9 @@ JaBudget Repository
   Wirft eine DomainException mit DomainFailure DUPLICATE_ENTITY
   falls ein Entity mit gleicher ID existiert.
   
-~~ TODO createAll - Massenanlegen?
+  <Alternativen>
+  
+    * Sollte die Entität mit gleicher ID und gleichen Daten vorhanden sein, wird dies nicht als Fehler gewertet.
   
 *** update
   
@@ -60,11 +85,16 @@ JaBudget Repository
   Wirft eine DomainException mit DomainFailure MISSING_ENTITY
   falls ein Entity mit gegebener ID nicht existiert.
   
-~~ TODO updateAll - Massenänderung?
+  <Alternativen>
+  
+    * Erzeugt die Entität, die nicht vorhanden ist.
+      Dies birgt die Gefahr, dass ein Client eine Entität löscht, die ein Anderer noch in Bearbeitung hat und dann persistiern möchte.
+      Hier kommt es zum Konflikt, welche Aktion "wichtiger" ist, das Löschen oder das Bearbeiten und Ändern.
+      Dies kann nur im Client aufgelöst werden, da es eine fachliche Entscheidung ist.
   
 ** Entitäten lesen
 
-  Beim Lesen von Entitäten besteht immer die Möglichkeit, dass die gesuchte(n) Enität(en) nicht existieren.
+  Beim Lesen von Entitäten besteht immer die Möglichkeit, dass die gesuchte(n) Entität(en) nicht existieren.
   Dies ist kein Ausnahmefall, daher wird dafür keine Ausnahme geworfen, sondern eine leere Antwort gegeben. 
   
   <Alternativen>
@@ -89,3 +119,30 @@ JaBudget Repository
 ~~ TODO spezifische finder 
 
 ~~ TODO wo bringe ich autocomplete Requests unter. auch in diesem Repository oder gibt es dafür spezielle (weil auch das Backend dann wahrscheinlich speziell ist?
+
+** Entitäten löschen
+
+*** delete
+
+  Beim Löschen von Entitäten besteht immer die Möglichkeit, dass die gesuchte Entität nicht existiert.
+  Dies wird nicht als Ausnahmefall gesehen, daher wird dafür keine Ausnahme geworfen.
+  Das Löschen einer nicht vorhandenen Entität wird als Erfolg angesehen.
+
+  <Alternativen>
+  
+    * Anstelle der booleschen Antwort kann ein Response-Objekt zurückgegeben werden, 
+      welches gegebenenfalls auch weitere Informationen liefern kann (z.B. dass die Entität zum Löschen bereits nicht mehr vorhanden war).
+      
+  Um eine Möglichst einfache Schnittstelle zu haben, reicht es aus, zum Löschen die ID der Entität zu liefern.
+  
+  <Alternativen>
+  
+    * Anstelle der ID wird die gesamte Entität geliefert. 
+      Damit bietet sich die Möglichkeit, bei abweichenden Daten das Löschen nicht durchzuführen und den Clienten zu befragen, 
+      ob auch die geänderte Instanz gelöscht werden soll.
+      Das Übertragen der gesamten Entität erhöht aber das Datenvolumen.
+      
+    * Anstelle der ID wird eine Entitätshülle geliefert, die die ID enthält.
+      Dies ist problematisch, da Entitäten immer valide sein sollen und somit die Pflichtfelder der Entität auch übertragen werden müssten.
+      
+  

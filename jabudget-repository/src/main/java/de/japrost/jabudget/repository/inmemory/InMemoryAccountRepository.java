@@ -74,12 +74,12 @@ public class InMemoryAccountRepository implements AccountRepository {
 	/**
 	 * {@inheritDoc}
 	 * <p>
-	 * <strong>This implementation</strong> does nothing.
+	 * <strong>This implementation</strong> returns {@link Boolean#TRUE} always.
 	 */
 	@Override
-	public void delete(Account account) {
-		// TODO Auto-generated method stub
-
+	public Boolean delete(String accountId) {
+		storage.remove(accountId);
+		return Boolean.TRUE;
 	}
 
 }

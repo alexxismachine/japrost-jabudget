@@ -1,0 +1,58 @@
+  -----
+  Backlog - JaBudget - Java Programming Studio
+  -----
+  alexxismachine
+  -----
+
+Technik
+
+  * Java 9 Module erstellen
+  
+  * Docker verwenden
+
+Domain
+
+  * Umstellen der Argument-Prüfung von <<<NPE>>> auf <<<IAE>>>.
+
+Repository
+
+  * JDBC-Repository
+  
+  * Suchfunktionalitäten / Typeahead
+
+Service
+
+  * "Echte Logik"
+  
+  * Unterscheiden zwischen "Business Service" und "CRUD-Service"?
+  
+  * Erstellen eines UI-Modells, damit das Persistenz-Modell ("Domain") vom UI-Modell unabhängig ist.
+    ?Verhindert dies gegebenenfalls einen stateless Server?
+
+UI 
+
+* Rest
+
+  * Spring unabhängige Schnittstelle
+  
+  * "Echtes" Rest
+  
+  * Konfigurierbarkeit der Pfade / Pfade über Konstanten bzw. Enums definieren.
+  
+  * UI-Tests
+
+* Vaadin
+
+  * Verwenden von Data-Binding
+
+  * Anzeigen von Fehlermeldungen
+  
+  * Trennung der UI-Bestandteile in View und Controller
+  
+  * UI-Tests 
+  
+  * Fav-Icon
+
+* Desktop
+
+  * UI-Tests

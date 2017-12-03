@@ -65,4 +65,15 @@ public class AccountService {
 	public Optional<Account> retrieveById(final String id) {
 		return accountRepository.findById(id);
 	}
+
+	/**
+	 * Delete a single {@link Account} by its id.
+	 * 
+	 * @param id of the {@link Account} to delete.
+	 * @return {@link Boolean#TRUE} if the account is removed after this operation.
+	 */
+	public Boolean erase(final String id) {
+		return accountRepository.delete(id);
+	}
+
 }

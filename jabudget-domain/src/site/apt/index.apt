@@ -8,4 +8,15 @@ JaBudget Domain
 
   JaBudget Domain definiert die Business Domain.   
 
+~~ Pro Domain-Objekt eine Validator-Klasse?
+
+~~ Separate Builder-Klasse?
+
+* Account
+
+  Ein Account wird anhand seiner <<<id>>> identifiziert. 
+  Auf diesem Feld basieren auch <<<equals()>>> und <<<hashCode()>>>.
   
+~~ Entwicklen eines Comparators, der Instanzen findet, die die "gleichen" Felder aber eine andere id haben?
+
+~~ Verwenden einer AccountId-Klasse?

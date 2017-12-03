@@ -7,10 +7,26 @@
 JaBudget
 
   Dies ist ein Projekt mit dem ich unterschiedliche Konzept ausprobiere. 
-  Der Fokus liegt nicht auf viel Funktionalität sondern auf dem testen von Konzepten. 
+  Der Fokus liegt nicht auf viel Funktionalität sondern auf dem Testen von Konzepten. 
 
   JaBudget ist eine Anwendung, die es einem erlaubt, seine Finanzen zu verwalten.
   Das modulare erweiterbare Konzept erlaubt es, mit einem einfachen Haushaltsbuch lokal zu starten 
   und über Erweiterungen nach den eigenen Ansprüchen und Vorlieben zu einer ausgewachsenen web-basierten Finanzverwaltung zu kommen.   
 
+* Grundlegende Entwicklungskonzepte
+
+  * Methoden geben nie <<<null>>> zurück, außer es ist explizit spezifiziert ("<MAY RETURN> <<<null>>>").
   
+  * Parameter dürfen nie <<<null>>> sein, außer es ist explizit spezifiziert ("<MAY BE> <<<null>>>").
+    Im Sinne eines <fail fast> können die Parameter geprüft werden und dabei gegebenenfalls eine <<<IllegalArgumentExcpetion>>> (IAE) geworfen werden.
+    <Anmerkung:>
+    Es wird bei der Prüfung keine <<<NullPointerException>>> (NPE) geworfen. 
+    NPEs signalisieren Fehler im Code des Aufgerufenen (der z.B. nicht geprüft hat, ob der potentielle <<<null>>>-Wert nicht <<<null>>> ist,
+    IAEs signalisieren Fehler des Aufrufers (der z.B. <<<null>>> an einer Stelle übergibt, an der dies nicht erlaubt ist).
+    
+~~ Unterschiedliche Namen für die Operationen in unterschiedlichen Schichten 
+~~ GET / retrieve / find, POST / ???() / create, PUT / ???(modify) / update, DELETE / erase / delete?
+~~ Über den Name weiß man gleich, in welcher Schicht man sich bewegt.
+~~ Oder über alle Schichten den gleichen Namen?
+~~ Bekommt der Controller die gleichen Namen wie der Serivce?
+~~ http://www.restapitutorial.com/lessons/httpmethods.html

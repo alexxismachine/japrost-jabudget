@@ -6,6 +6,11 @@
  
 JaBudget Service
 
-  JaBudget Service definiert und implementiert die Business Services.   
+  JaBudget Service definiert und implementiert die Business Services.
+  
+* AccountService
+  
+  Da aktuell keine Geschäftslogik existiert und die Domänenobjekte direkt in der UI verwendet werden, 
+  reicht der Service die Daten direkt durch. 
 
   

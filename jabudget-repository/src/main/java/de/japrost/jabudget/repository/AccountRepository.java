@@ -8,7 +8,7 @@ import de.japrost.jabudget.domain.DomainFailure;
 import de.japrost.jabudget.domain.account.Account;
 
 /**
- * The repository for {@link Account}s,
+ * The repository for {@link Account}s.
  */
 public interface AccountRepository {
 
@@ -47,10 +47,11 @@ public interface AccountRepository {
 	Set<Account> findAll();
 
 	/**
-	 * Delete an {@link Account}.
+	 * Delete an {@link Account} by its id.
 	 * 
-	 * @param account the {@link Account} to delete.
+	 * @param accountId the id of the {@link Account} to delete.
+	 * @return {@link Boolean#TRUE} if the Account does not exist after this operation. It does not indicate that the
+	 *         entity to delete did exist. Returns {@link Boolean#FALSE} if the entity could not be deleted.
 	 */
-	// TODO what on not found?
-	void delete(Account account);
+	Boolean delete(String accountId);
 }
