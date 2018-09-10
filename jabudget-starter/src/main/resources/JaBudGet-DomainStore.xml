@@ -1,0 +1,14 @@
+<Store>
+  <jabudget.account.Account>
+    <id>333</id>
+    <name>Halv Evil</name>
+  </jabudget.account.Account>
+  <jabudget.account.Account>
+    <id>4711</id>
+    <name>Taxi-Bank</name>
+  </jabudget.account.Account>
+  <jabudget.account.Account>
+    <id>3812</id>
+    <name>Java-Bank</name>
+  </jabudget.account.Account>
+</Store>

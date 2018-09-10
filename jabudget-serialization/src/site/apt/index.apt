@@ -1,0 +1,16 @@
+  -----
+  JaBudget Serialization - Java Programming Studio
+  -----
+  alexxismachine
+  -----
+ 
+JaBudget Serialization
+
+  JaBudget Serialization dient zum Export und Import der gesamten Domäne (<<<DomainStore>>>).
+  Der DomainStore umfasst momentan nur die Accouts.
+  Wie der DomainStore unter Verwendung eines PlugIn-Konzepts erweitert werden kann ist noch unklar.
+    
+  Als erste Implementierung wird per XStream von und nach XML seralisiert.
+  
+  Aktuell stellt dieses Modul Lazy-Versionen von FileInput- und FileOutputStreams zur Verfügung,
+  damit ein mehrfaches lesen / schreiben möglich ist.

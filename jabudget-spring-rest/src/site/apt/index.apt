@@ -23,6 +23,10 @@ JaBudget Spring Rest
   Liefert die erstellte Entität zurück.
   Ist die Entität bereits vorhanden wird der HttpStatus <<<422>>> zurückgeliefert.
   
+---
+curl -H "Content-Type: application/json" -d '{"id":4711, "name":"peter"}' http://localhost:8080/rest/accounts
+---  
+  
 *** <<<PUT>>> <<</accounts/\{id}>>>
 
   Update eines Accounts.
@@ -36,14 +40,44 @@ JaBudget Spring Rest
   Anzeigen vorhandener aller Accounts.
   Sind keine Accounts vorhanden wird eine leere Liste zurückgeliefert.
   
+---
+curl http://localhost:8080/rest/accounts
+---  
+  
 *** <<<GET>>> <<<accounts/\{id}>>>
   
   Anzeigen eines einzelnen Accounts anhand seiner <<<id>>>.
   Ist dieser Account nicht vorhanden wird der HttpStatus <<<204>>> zurückgeliefert.
   
+* SerializationController
+
+  Über den SerialisationController lässt sich die gesamte Domäne laden und speichern.
+
+** Exportieren
+
+*** <<<GET>>> <<</impexp/ser>>>
+
+  Schreibt die ganze Domäne entsprechend der Konfiguration.
+
+** Importieren
+
+*** <<<GET>>> <<</impexp/des>>>
+
+  Liest (und ersetzt) die ganze Domäne entsprechend der Konfiguration.
+
 * RestExceptionHandler
 
 ** Verarbeiten einer DomainException
 
   Mapping der DomainFailure in HttpStatusCodes.
   Unbekannte DomainFailures werden in <<<500>>> gemapped.
+  
+* Integrationstests 
+
+  Die Integrationstests auf dieser Ebene müssen nur testen, dass das Binding 
+  durch Spring korrekt konfiguriert ist.
+  Dazu wird <<<spring-test>>> mit <<<spring-webmvc>>> verwendet.
+  Dies hat den Vorteil, dass kein Servlet-Container hochgefahren werden muss
+  und die Tests damit sehr schnell laufen.
+  End-To-End-Tests mit Servlet-Conatinern werden der jeweiligen Applikation überlassen
+  (z.B. SpringBoot).

@@ -1,0 +1,10 @@
+<Store>
+  <jabudget.account.Account>
+    <id>altAccId</id>
+    <name>altAccName</name>
+  </jabudget.account.Account>
+  <jabudget.account.Account>
+    <id>defAccId</id>
+    <name>defAccName</name>
+  </jabudget.account.Account>
+</Store>

@@ -16,6 +16,7 @@ import com.vaadin.ui.VerticalLayout;
 import de.japrost.jabudget.domain.DomainException;
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.service.AccountService;
+import de.japrost.jabudget.service.SerializationService;
 
 /**
  * Main UI for JaBudget.
@@ -26,6 +27,7 @@ public class JaBudGetUI extends UI {
 
 	private static final long serialVersionUID = 1L;
 
+	// Account
 	private final transient AccountService accountService;
 	private ListDataProvider<Account> accountData;
 	private Account selectedAccount;
@@ -34,14 +36,20 @@ public class JaBudGetUI extends UI {
 	private Button delete;
 	private TextField newId;
 	private TextField newName;
+	// Serialization
+	private final transient SerializationService serializationService;
+	private Button export;
+	private Button impoort;
 
 	/**
 	 * Instantiate with all dependencies.
-	 * 
+	 *
 	 * @param accountService the {@link AccountService} to use.
+	 * @param serializationService the {@link SerializationService} to use.
 	 */
-	public JaBudGetUI(final AccountService accountService) {
+	public JaBudGetUI(final AccountService accountService, final SerializationService serializationService) {
 		this.accountService = accountService;
+		this.serializationService = serializationService;
 	}
 
 	/**
@@ -56,6 +64,7 @@ public class JaBudGetUI extends UI {
 		mainLayout.setSizeFull();
 		mainLayout.addComponent(initAccountOverview());
 		mainLayout.addComponent(initAccountForm());
+		mainLayout.addComponent(initSerialization());
 	}
 
 	private VerticalLayout initAccountOverview() {
@@ -70,7 +79,7 @@ public class JaBudGetUI extends UI {
 		return layout;
 	}
 
-	private void itemClicked(ItemClick<Account> e) {
+	private void itemClicked(final ItemClick<Account> e) {
 		selectedAccount = e.getItem();
 		newId.setValue(selectedAccount.getId());
 		newName.setValue(selectedAccount.getName());
@@ -113,7 +122,7 @@ public class JaBudGetUI extends UI {
 	}
 
 	private void deleteAccount(final Button.ClickEvent event) {
-		Boolean erased = accountService.erase(newId.getValue());
+		final Boolean erased = accountService.erase(newId.getValue());
 		if (erased) {
 			accountData.getItems().remove(selectedAccount);
 			accountData.refreshAll();
@@ -136,7 +145,7 @@ public class JaBudGetUI extends UI {
 				accountData.getItems().remove(account);
 				accountData.getItems().add(account);
 			}
-		} catch (DomainException e) {
+		} catch (final DomainException e) {
 			// FIXME show error message
 			return;
 		}
@@ -156,5 +165,27 @@ public class JaBudGetUI extends UI {
 			newAccount.setEnabled(true);
 			clear.setEnabled(true);
 		}
+	}
+
+	private VerticalLayout initSerialization() {
+		final VerticalLayout layout = new VerticalLayout();
+		impoort = new Button();
+		impoort.setCaption("Import");
+		impoort.addClickListener(e -> {
+			serializationService.deserialize();
+			reloadAccounts();
+		});
+		layout.addComponent(impoort);
+		export = new Button();
+		export.setCaption("Export");
+		export.addClickListener(e -> serializationService.serialize());
+		layout.addComponent(export);
+		return layout;
+	}
+
+	private void reloadAccounts() {
+		accountData.getItems().clear();
+		accountData.getItems().addAll(accountService.retrieveAll());
+		accountData.refreshAll();
 	}
 }

@@ -23,6 +23,13 @@
     </dependency>
     <!-- TEST -->
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jabudget-domain</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+      <type>test-jar</type>
+    </dependency>
+    <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>3.8.0</version>

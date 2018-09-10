@@ -13,4 +13,6 @@ JaBudget Service
   Da aktuell keine Geschäftslogik existiert und die Domänenobjekte direkt in der UI verwendet werden, 
   reicht der Service die Daten direkt durch. 
 
-  
+* SerializationService
+
+  Service, der zum Im- und Export die Serialization mit den Repositories verbindet.

@@ -16,7 +16,7 @@ import de.japrost.jabudget.repository.AccountRepository;
  */
 public class InMemoryAccountRepository implements AccountRepository {
 
-	private Map<String, Account> storage = new HashMap<>();
+	private final Map<String, Account> storage = new HashMap<>();
 
 	/**
 	 * {@inheritDoc}
@@ -24,7 +24,7 @@ public class InMemoryAccountRepository implements AccountRepository {
 	 * <strong>This implementation</strong> stores and gives defensive copies of the given account.
 	 */
 	@Override
-	public Account create(Account account) throws DomainException {
+	public Account create(final Account account) throws DomainException {
 		if (storage.containsKey(account.getId())) {
 			throw new DomainException(DomainFailure.DUPLICATE_ENTITY);
 		}
@@ -37,7 +37,7 @@ public class InMemoryAccountRepository implements AccountRepository {
 	 * <strong>This implementation</strong> stores and gives defensive copies of the given account.
 	 */
 	@Override
-	public Account update(Account account) throws DomainException {
+	public Account update(final Account account) throws DomainException {
 		if (!storage.containsKey(account.getId())) {
 			throw new DomainException(DomainFailure.MISSING_ENTITY);
 		}
@@ -45,8 +45,19 @@ public class InMemoryAccountRepository implements AccountRepository {
 
 	}
 
-	private Account putInStoreDefensively(Account account) {
-		Account accountToStore = new Account.Builder(account).build();
+	/**
+	 * {@inheritDoc}
+	 * <p>
+	 * <strong>This implementation</strong> clears existing and adds defensive copies to store.
+	 */
+	@Override
+	public void replaceAll(final Set<Account> accounts) {
+		storage.clear();
+		accounts.forEach(this::putInStoreDefensively);
+	}
+
+	private Account putInStoreDefensively(final Account account) {
+		final Account accountToStore = new Account.Builder(account).build();
 		storage.put(account.getId(), accountToStore);
 		return new Account.Builder(account).build();
 	}
@@ -57,7 +68,7 @@ public class InMemoryAccountRepository implements AccountRepository {
 	 * <strong>This implementation</strong> gives a defensive copy of the stored accounts.
 	 */
 	@Override
-	public Optional<Account> findById(String id) {
+	public Optional<Account> findById(final String id) {
 		return Account.Builder.builder(storage.get(id)).buildOptional();
 	}
 
@@ -77,7 +88,7 @@ public class InMemoryAccountRepository implements AccountRepository {
 	 * <strong>This implementation</strong> returns {@link Boolean#TRUE} always.
 	 */
 	@Override
-	public Boolean delete(String accountId) {
+	public Boolean delete(final String accountId) {
 		storage.remove(accountId);
 		return Boolean.TRUE;
 	}

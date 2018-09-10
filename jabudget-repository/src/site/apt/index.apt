@@ -91,7 +91,18 @@ JaBudget Repository
       Dies birgt die Gefahr, dass ein Client eine Entität löscht, die ein Anderer noch in Bearbeitung hat und dann persistiern möchte.
       Hier kommt es zum Konflikt, welche Aktion "wichtiger" ist, das Löschen oder das Bearbeiten und Ändern.
       Dies kann nur im Client aufgelöst werden, da es eine fachliche Entscheidung ist.
+
+*** replaceAll
+
+  Löscht alle vorhandenen Entitäten und ersetzt sie duch die gegebenen. 
+  Diese Methode ist für Importe / Migrationen gedacht.
   
+  <Alternativen>
+  
+  * Über findAll und anschließendes create / update / delete den Austausch aller Entitäten vornehmen.
+    Dies hätte den Vorteil, dass ein Auditing stattfinden kann.
+    Dies hat den Nachteil, dass ein Importer eine Vergleichslogik implementieren muss.
+    
 ** Entitäten lesen
 
   Beim Lesen von Entitäten besteht immer die Möglichkeit, dass die gesuchte(n) Entität(en) nicht existieren.
@@ -111,6 +122,11 @@ JaBudget Repository
   Die Entities haben keine natürliche Ordnung und es gibt keine doppelten Entitäten, daher wird ein Set verwendet.
   Sind keine Entitäten vorhanden, wird ein leeres Set zurückgeliefert.
   
+  <Alternativen>
+  
+    * Anstelle der vollständigen Entitäten werden nur die IDs der Entitäten zurückgegeben, 
+      um die Ergebnisgröße einzuschränken.
+    
 *** findById
 
   Liefert eine einzelne Entität anhand ihrer Id zurück.

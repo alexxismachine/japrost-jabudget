@@ -1,5 +1,5 @@
   -----
-  JaBudget  Domain - Java Programming Studio
+  JaBudget Domain - Java Programming Studio
   -----
   alexxismachine
   -----
@@ -20,3 +20,16 @@ JaBudget Domain
 ~~ Entwicklen eines Comparators, der Instanzen findet, die die "gleichen" Felder aber eine andere id haben?
 
 ~~ Verwenden einer AccountId-Klasse?
+
+* Testing
+
+  Neben den regulären Unit-Tests in <<<src/test/java>>> gibt es Test-Fixtures, die in
+  <<<src/test/fixtures>>> liegen.
+  Diese enthalten Klassen zur vereinfachten Erzeugung von Testdaten.
+  
+  Damit auch abhängige Projekte diese Fixtures nutzen können
+  wird aus diesen über ein Assembly eine <<<jar>>> mit dem <<<classifier>>> 
+  <<<fixtures>>> erstellt.
+  
+  Die Fixtures liegen alle unter <<<fixtures>>> unterhalb des Basispackages, 
+  damit es nicht zu Paket-Überschneidungen kommen kann.

@@ -1,5 +1,7 @@
 package de.japrost.jabudget.spring;
 
+import java.util.Objects;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,13 +19,16 @@ public class RestExceptionHandler {
 
 	/**
 	 * Handle {@link DomainException}s e.g. from repositories.
-	 * 
+	 *
 	 * @param e the exception to handle
 	 * @return an empty {@link ResponseEntity} with the according {@link HttpStatus}.
 	 */
 	@ExceptionHandler(DomainException.class)
-	public ResponseEntity<Account> handleDomainException(DomainException e) {
-		DomainFailure domainFailure = e.getFailure();
+	public ResponseEntity<Account> handleDomainException(final DomainException e) {
+		if (Objects.isNull(e)) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		final DomainFailure domainFailure = e.getFailure();
 		switch (domainFailure) {
 			case DUPLICATE_ENTITY:
 				return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);

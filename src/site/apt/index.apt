@@ -24,6 +24,28 @@ JaBudget
     NPEs signalisieren Fehler im Code des Aufgerufenen (der z.B. nicht geprüft hat, ob der potentielle <<<null>>>-Wert nicht <<<null>>> ist,
     IAEs signalisieren Fehler des Aufrufers (der z.B. <<<null>>> an einer Stelle übergibt, an der dies nicht erlaubt ist).
     
+* Schichten / Modul-Abhängikeiten
+
+  * <<domain>> definiert die Business-Domäne
+  
+  * <<serialization>> importiert und exportiert alle <<domain>>-Objekte
+  
+  * <<repository>> persistiert <<domain>>-Objekte im laufenden Betrieb
+  
+  * <<service>> 
+  
+    * erhält von <<repostiory>> die <<domain>>-Objekte 
+    
+    * enthält die Geschäftslogik
+  
+    * kann über <<serialization>> die Domäne lesen und schreiben
+  
+  * <<spring-rest>> veröffentlicht die aus <<service>> erhaltenen <<domain>>-Objekte per REST
+  
+  * <<vaadin-spring>> veröffentlicht die aus <<service>> erhaltenen <<domain>>-Objekte als Web-UI
+  
+  * <<starter>> ist die Spring-Boot-Applikation, die <<spring-rest>> und <<vaadin-spring>> antreibt.
+  
 ~~ Unterschiedliche Namen für die Operationen in unterschiedlichen Schichten 
 ~~ GET / retrieve / find, POST / ???() / create, PUT / ???(modify) / update, DELETE / erase / delete?
 ~~ Über den Name weiß man gleich, in welcher Schicht man sich bewegt.

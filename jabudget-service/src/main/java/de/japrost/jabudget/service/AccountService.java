@@ -17,7 +17,7 @@ public class AccountService {
 
 	/**
 	 * Initialize with all dependencies.
-	 * 
+	 *
 	 * @param accountRepository the {@link AccountRepository} to use.
 	 */
 	public AccountService(final AccountRepository accountRepository) {
@@ -26,18 +26,19 @@ public class AccountService {
 
 	/**
 	 * Create a new {@link Account}.
-	 * 
+	 *
 	 * @param account the Account to be created
 	 * @return the new Account.
 	 * @throws DomainException when the Account already exists.
 	 */
 	public Account create(final Account account) throws DomainException {
+		// TODO the service creates the ID. Do not use create to import an existing account (e.g. created in an offline application).
 		return accountRepository.create(account);
 	}
 
 	/**
 	 * Update an existing {@link Account}.
-	 * 
+	 *
 	 * @param account the Account to be updated
 	 * @return the updated Account.
 	 * @throws DomainException when the Account does not exist.
@@ -48,7 +49,7 @@ public class AccountService {
 
 	/**
 	 * Retrieve all accounts.
-	 * 
+	 *
 	 * @return all available accounts.
 	 */
 	public List<Account> retrieveAll() {
@@ -57,7 +58,7 @@ public class AccountService {
 
 	/**
 	 * Retrieve a single {@link Account} by its id.
-	 * 
+	 *
 	 * @param id the id of the {@link Account}.
 	 * @return the {@link Account} with the id. An empty {@link Optional} if no {@link Account} is available for the given
 	 *         id.
@@ -68,7 +69,7 @@ public class AccountService {
 
 	/**
 	 * Delete a single {@link Account} by its id.
-	 * 
+	 *
 	 * @param id of the {@link Account} to delete.
 	 * @return {@link Boolean#TRUE} if the account is removed after this operation.
 	 */

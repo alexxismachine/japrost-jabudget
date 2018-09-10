@@ -36,6 +36,9 @@
         name="Übersicht"
         href="index.html" />
       <item
+        name="Serialization"
+        href="serialization/index.html" />
+      <item
         name="Repository"
         href="repository/index.html" />
       <item

@@ -2,6 +2,8 @@ package de.japrost.jabudget.repository.inmemory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Set;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,13 +11,17 @@ import org.junit.Test;
 import de.japrost.jabudget.domain.DomainException;
 import de.japrost.jabudget.domain.DomainFailure;
 import de.japrost.jabudget.domain.account.Account;
+import de.japrost.jabudget.domain.fixtures.account.AccountFixtureValues;
+import de.japrost.jabudget.domain.fixtures.account.AccountFixtures;
 
 /**
  * Test the {@link InMemoryAccountRepository}.
  */
-public class InMemoryAccountRepositoryTest {
+public class InMemoryAccountRepositoryTest implements AccountFixtureValues {
 
 	private InMemoryAccountRepository cut;
+	private final AccountFixtures accountFixtures = new AccountFixtures();
+	private Account defaultAccount;
 
 	/**
 	 * Set up each test.
@@ -23,87 +29,100 @@ public class InMemoryAccountRepositoryTest {
 	@Before
 	public void setUp() {
 		cut = new InMemoryAccountRepository();
+		defaultAccount = accountFixtures.createDefault();
 	}
 
 	/**
 	 * The given instance is not returned when stored.
-	 * 
+	 *
 	 * @throws Exception never
 	 */
 	@Test
 	public void create_doesNotReturnGivenInstance() throws Exception {
 		// given
-		Account account = Account.Builder.builder("an id").build();
 		// when
-		Account actual = cut.create(account);
-		// then 
-		assertThat(actual).isEqualTo(account);
-		assertThat(actual).isNotSameAs(account);
+		final Account actual = cut.create(defaultAccount);
+		// then
+		assertThat(actual).isEqualTo(defaultAccount);
+		assertThat(actual).isNotSameAs(defaultAccount);
 	}
 
 	/**
 	 * The given instance is not stored.
-	 * 
+	 *
 	 * @throws Exception never
 	 */
 	@Test
 	public void create_doesNotStoreGivenInstance() throws Exception {
 		// given
-		Account account = Account.Builder.builder("an id").build();
 		// when
-		cut.create(account);
-		account.setName("a name");
-		// then 
-		Account actual = cut.findById("an id").get();
-		assertThat(actual.getName()).isNull();
+		cut.create(defaultAccount);
+		defaultAccount.setName(ACCOUNT_ALT_NAME);
+		// then
+		final Account actual = cut.findById(ACCOUNT_DEF_ID).get();
+		assertThat(actual.getName()).isEqualTo(ACCOUNT_DEF_NAME);
 	}
 
 	/**
 	 * Duplicate throws Exception.
-	 * 
+	 *
 	 * @throws Exception never
 	 */
 	@Test
 	public void create_doesNotStoreDuplicates() throws Exception {
 		// given
-		Account account = Account.Builder.builder("an id").build();
-		cut.create(account);
+		cut.create(defaultAccount);
 		// when then
 		Assertions.assertThatExceptionOfType(DomainException.class).isThrownBy(() -> {
-			cut.create(account);
+			cut.create(defaultAccount);
 		}).matches(p -> p.getFailure() == DomainFailure.DUPLICATE_ENTITY);
 	}
 
 	/**
 	 * Update updates.
-	 * 
+	 *
 	 * @throws Exception never
 	 */
 	@Test
 	public void update_updates() throws Exception {
 		// given
-		Account account = Account.Builder.builder("an id").build();
-		cut.create(account);
-		account.setName("a name");
+		cut.create(defaultAccount);
+		defaultAccount.setName(ACCOUNT_ALT_NAME);
 		// when
-		cut.update(account);
-		// then 
-		Account actual = cut.findById("an id").get();
-		assertThat(actual.getName()).isEqualTo("a name");
+		cut.update(defaultAccount);
+		// then
+		final Account actual = cut.findById(ACCOUNT_DEF_ID).get();
+		assertThat(actual.getName()).isEqualTo(ACCOUNT_ALT_NAME);
 	}
 
 	/**
 	 * Missing throws Exception.
-	 * 
+	 *
 	 * @throws Exception never
 	 */
 	@Test
 	public void update_doesNotStoreMissing() throws Exception {
 		// given
-		Account account = Account.Builder.builder("an id").build();
 		// when then
 		Assertions.assertThatExceptionOfType(DomainException.class).isThrownBy(() -> {
-			cut.update(account);
+			cut.update(defaultAccount);
 		}).matches(p -> p.getFailure() == DomainFailure.MISSING_ENTITY);
+	}
+
+	/**
+	 * Replace all removes all elements and replaces them by the given.
+	 *
+	 * @throws Exception never
+	 */
+	@Test
+	public void replaceAll_replacesAll() throws Exception {
+		// given
+		cut.create(defaultAccount);
+		// when
+		cut.replaceAll(Set.of(accountFixtures.createAlternate()));
+		// then
+		Assertions.assertThat(cut.findById(ACCOUNT_DEF_ID)).isEmpty();
+		Assertions.assertThat(cut.findAll()).hasSize(1);
+		Assertions.assertThat(cut.findById(ACCOUNT_ALT_ID)).contains(accountFixtures.createAlternate());
 	}
 }

@@ -20,21 +20,120 @@
   <url>http://www.japrost.de/java/jabudget</url>
 
   <modules>
-  	<module>jabudget-domain</module>
+    <module>jabudget-domain</module>
     <module>jabudget-service</module>
-  	<module>jabudget-spring-rest</module>
-  	<module>jabudget-vaadin-spring</module>
-  	<module>jabudget-repository</module>
-  	<module>jabudget-starter</module>
+    <module>jabudget-spring-rest</module>
+    <module>jabudget-vaadin-spring</module>
+    <module>jabudget-repository</module>
+    <module>jabudget-starter</module>
+    <module>jabudget-serialization</module>
   </modules>
-  
+
   <properties>
     <japrost.site.locales>de</japrost.site.locales>
     <java.source.version>9</java.source.version>
     <java.target.version>9</java.target.version>
-    <version.jacoco-maven-plugin>0.7.9</version.jacoco-maven-plugin>
+    <version.jacoco-maven-plugin>0.8.2</version.jacoco-maven-plugin>
     <japrost.qa.version>1.0</japrost.qa.version>
+    <!-- dependencies -->
+    <version.mockito-core>2.10.0</version.mockito-core>
   </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.22.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>add-test-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/src/test/fixtures</source>
+                <source>${project.basedir}/src/it/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <configuration>
+          <gpgArguments>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <!-- standard reports -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.7</version>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.8.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.outsideMyBox</groupId>
+      <artifactId>testUtils</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
 
   <distributionManagement>
     <site>
