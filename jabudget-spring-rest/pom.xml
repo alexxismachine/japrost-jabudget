@@ -11,10 +11,6 @@
   <description>The spring rest web application of JaBudGet</description>
   <url>http://www.japrost.de/java/jabudget/spring-rest</url>
 
-  <properties>
-    <spring.version>4.3.8.RELEASE</spring.version>
-  </properties>
-
   <dependencies>
     <!-- INTERNAL -->
     <dependency>
@@ -28,6 +24,10 @@
       <version>${project.version}</version>
     </dependency>
     <!-- EXTENAL -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
@@ -92,17 +92,6 @@
       </plugin>
     </plugins>
   </reporting>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-framework-bom</artifactId>
-        <version>${spring.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <distributionManagement>
     <site>
       <id>japrostSiteId</id>

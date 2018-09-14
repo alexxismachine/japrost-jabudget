@@ -11,10 +11,6 @@
   <description>The starter for JaBudGet</description>
   <url>http://www.japrost.de/java/jabudget/starter</url>
 
-  <properties>
-    <vaadin.version>8.0.6</vaadin.version>
-  </properties>
-
   <dependencies>
     <!-- INTERNAL -->
     <dependency>
@@ -41,7 +37,7 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>1.5.3.RELEASE</version>
+      <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
       <groupId>com.vaadin</groupId>
@@ -50,21 +46,10 @@
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin-server</artifactId>
-      <version>${vaadin.version}</version>
     </dependency>
     <!-- TEST -->
   </dependencies>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-bom</artifactId>
-        <version>${vaadin.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  
   <distributionManagement>
     <site>
       <id>japrostSiteId</id>
