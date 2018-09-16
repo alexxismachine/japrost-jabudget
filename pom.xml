@@ -39,10 +39,16 @@
     <spring.version>5.0.9.RELEASE</spring.version>
     <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
     <vaadin.version>8.5.2</vaadin.version>
-    <!-- dependency versions test-->
+    <version.commons-io>2.6</version.commons-io>
+    <version.commons-lang3>3.8</version.commons-lang3>
+    <!-- dependency versions test -->
+    <version.assertj>3.11.1</version.assertj>
     <junit.version>5.3.1</junit.version>
-    <version.mockito-core>2.10.0</version.mockito-core>
+    <version.mockito-core>2.22.0</version.mockito-core>
+    <version.servlet-api>4.0.1</version.servlet-api>
+    <version.testUtils>0.1.3</version.testUtils>
   </properties>
+
   <build>
     <plugins>
       <plugin>
@@ -126,7 +132,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.8.0</version>
+      <version>${version.assertj}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -137,10 +143,12 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <dependencyManagement>
@@ -158,6 +166,12 @@
         <version>${spring.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${version.servlet-api}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.junit</groupId>
