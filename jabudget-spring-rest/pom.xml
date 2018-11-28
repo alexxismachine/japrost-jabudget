@@ -39,6 +39,7 @@
       <version>${project.version}</version>
       <classifier>fixtures</classifier>
       <scope>test</scope>
+      <type>test-jar</type>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

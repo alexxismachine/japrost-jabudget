@@ -9,16 +9,28 @@ Technik
   * Java 9 Module erstellen
   
   * Docker verwenden
+  
+  * Java 10 / 11
+  
+  * maven wrapper
 
 Domain
 
-  * Umstellen der Argument-Prüfung von <<<NPE>>> auf <<<IAE>>>.
+  * Technische ID, Fachlicher CODE?
 
+  * Umstellen der Argument-Prüfung von <<<NPE>>> auf <<<IAE>>>.
+  
+  * Zweite Entität (AccountLine)
+  
 Repository
 
   * JDBC-Repository
   
   * Suchfunktionalitäten / Typeahead
+  
+Serialization
+
+  * Unterstützung von Versionen zur kontinuierlichen Weiterentwicklung
 
 Service
 
@@ -29,19 +41,15 @@ Service
   * Erstellen eines UI-Modells, damit das Persistenz-Modell ("Domain") vom UI-Modell unabhängig ist.
     ?Verhindert dies gegebenenfalls einen stateless Server?
 
-UI 
+Spring Rest 
 
-* Rest
-
-  * Spring unabhängige Schnittstelle
-  
-  * "Echtes" Rest
+  * "Echtes" Rest (HATEOAS)
   
   * Konfigurierbarkeit der Pfade / Pfade über Konstanten bzw. Enums definieren.
   
-  * UI-Tests
+Vaadin Spring
 
-* Vaadin
+  * Update auf Vaadin 10
 
   * Verwenden von Data-Binding
 
@@ -49,10 +57,10 @@ UI
   
   * Trennung der UI-Bestandteile in View und Controller
   
-  * UI-Tests 
+  * UI-Tests (Page-Objects)
   
   * Fav-Icon
 
-* Desktop
+Desktop
 
-  * UI-Tests
+  * JavaFX?
