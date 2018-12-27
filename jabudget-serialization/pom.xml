@@ -16,7 +16,18 @@
       <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
       <version>1.4.10</version>
-    </dependency>  
+      <exclusions>
+        <!-- exclude xpp since it has split package -->
+        <exclusion>
+          <groupId>xpp3</groupId>
+          <artifactId>xpp3_min</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xmlpull</groupId>
+          <artifactId>xmlpullpp3_min</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <!-- INTERNAL -->
     <dependency>
       <groupId>${project.groupId}</groupId>

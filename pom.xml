@@ -33,8 +33,6 @@
     <japrost.site.locales>de</japrost.site.locales>
     <japrost.qa.version>1.0</japrost.qa.version>
     <!-- plugin versions -->
-    <version.jacoco-maven-plugin>0.8.2</version.jacoco-maven-plugin>
-    <version.maven-gpg-plugin>1.6</version.maven-gpg-plugin>
     <version.maven-enforcer-plugin>3.0.0-M2</version.maven-enforcer-plugin>
     <!-- dependency versions -->
     <spring.version>5.0.9.RELEASE</spring.version>
@@ -99,17 +97,6 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>${version.maven-gpg-plugin}</version>
-        <configuration>
-          <gpgArguments>
-            <arg>--pinentry-mode</arg>
-            <arg>loopback</arg>
-          </gpgArguments>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>${version.maven-enforcer-plugin}</version>
         <executions>
@@ -129,21 +116,12 @@
         </executions>
       </plugin>
     </plugins>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
 
   <dependencies>
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>${version.assertj}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

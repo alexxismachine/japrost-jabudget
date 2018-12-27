@@ -23,6 +23,7 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>jabudget-domain</artifactId>
       <version>${project.version}</version>
+      <classifier>fixtures</classifier>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>

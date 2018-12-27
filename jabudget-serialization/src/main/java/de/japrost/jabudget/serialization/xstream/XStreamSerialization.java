@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.serialization.DomainStore;
@@ -46,7 +47,8 @@ public final class XStreamSerialization implements Serialization {
 	public XStreamSerialization(final InputStream in, final OutputStream out) {
 		this.in = in;
 		this.out = out;
-		this.xstream = new XStream();
+		// TODO using dom driver for xpp has split package
+		this.xstream = new XStream(new DomDriver());
 		this.xstream.addImplicitCollection(DomainStore.class, "accounts");
 		this.xstream.aliasPackage("jabudget.account", Account.class.getPackageName());
 		this.xstream.aliasType("Store", DomainStore.class);

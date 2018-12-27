@@ -2,6 +2,7 @@ package de.japrost.jabudget.starter;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +50,8 @@ public class JaBudGetConfig {
 
 	@Bean
 	Serialization serialization() throws IOException {
-		final File parent = new File("src/main/resources");
+		URL resource = this.getClass().getResource("/");
+		final File parent = new File(resource.getPath());
 		parent.mkdirs();
 		final File file = new File(parent, "JaBudGet-DomainStore.xml");
 		file.createNewFile();
