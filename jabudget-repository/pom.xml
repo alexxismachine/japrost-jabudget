@@ -27,11 +27,6 @@
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>
-    <dependency>
-      <groupId>org.outsideMyBox</groupId>
-      <artifactId>testUtils</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
   <distributionManagement>
     <site>

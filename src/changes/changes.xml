@@ -4,6 +4,17 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
     <release
+      version="0.0.2"
+      description="Java 11"
+      date="2018-12-29">
+      <action type="add">
+        Create Java Modules.
+      </action>
+      <action type="update">
+        Update dependencies, parent and plugins to be Java 11 compatible.
+      </action>
+    </release>
+    <release
       version="0.0.1"
       description="bootstrap"
       date="2018-09-10">

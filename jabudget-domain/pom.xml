@@ -14,14 +14,6 @@
   <description>The domain model of JaBudGet</description>
   <url>http://www.japrost.de/java/jabudget/domain</url>
 
-  <dependencies>
-    <!-- TEST -->
-    <dependency>
-      <groupId>org.outsideMyBox</groupId>
-      <artifactId>testUtils</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
   <build>
     <plugins>
       <plugin>
