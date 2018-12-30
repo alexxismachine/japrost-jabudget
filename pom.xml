@@ -4,7 +4,7 @@
   <parent>
     <groupId>de.japrost</groupId>
     <artifactId>japrost-java-parent</artifactId>
-    <version>11.0.1</version>
+    <version>11.0.2-SNAPSHOT</version>
   </parent>
 
   <groupId>de.japrost.jabudget</groupId>
@@ -28,35 +28,18 @@
 
   <properties>
     <japrost.site.locales>de</japrost.site.locales>
-    <japrost.qa.version>1.0</japrost.qa.version>
     <!-- plugin versions -->
     <version.maven-enforcer-plugin>3.0.0-M2</version.maven-enforcer-plugin>
     <!-- dependency versions -->
     <spring.version>5.0.9.RELEASE</spring.version>
     <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
     <vaadin.version>8.5.2</vaadin.version>
-    <version.commons-io>2.6</version.commons-io>
-    <version.commons-lang3>3.8</version.commons-lang3>
     <!-- dependency versions test -->
-    <version.assertj>3.11.1</version.assertj>
-    <junit.version>5.3.1</junit.version>
-    <version.mockito-core>2.22.0</version.mockito-core>
     <version.servlet-api>4.0.1</version.servlet-api>
-    <version.testUtils>0.1.3</version.testUtils>
   </properties>
 
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>7.0</version>
-          </dependency>
-        </dependencies>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -168,13 +151,6 @@
         <artifactId>javax.servlet-api</artifactId>
         <version>${version.servlet-api}</version>
         <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-        <version>${junit.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
