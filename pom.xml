@@ -9,7 +9,7 @@
 
   <groupId>de.japrost.jabudget</groupId>
   <artifactId>jabudget</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>JaProst Buddy to Get your financial done</name>
@@ -188,6 +188,6 @@
   <scm>
     <developerConnection>scm:git:git://bitbucket.org/daprost/japrost-jbudget</developerConnection>
     <url>https://bitbucket.org/daprost/japrost-jbudget</url>
-    <tag>jabudget-0.0.2</tag>
+    <tag>HEAD</tag>
   </scm>
 </project>
