@@ -12,7 +12,7 @@ import de.japrost.jabudget.spring.config.SpringRestConfiguration;
  */
 @SpringBootApplication
 @ComponentScan(basePackageClasses = { de.japrost.jabudget.starter.JaBudGetConfig.class,
-		de.japrost.jabudget.vaadin.spring.JaBudGetUI.class })
+		de.japrost.jabudget.vaadin.spring.Config.class })
 @Import({ SpringRestConfiguration.class })
 public class JaBudGetStarter {
 

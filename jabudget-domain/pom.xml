@@ -28,6 +28,7 @@
             <goals>
               <goal>single</goal>
             </goals>
+            <!--
             <configuration>
               <archive>
                 <manifestEntries>
@@ -35,6 +36,7 @@
                 </manifestEntries>
               </archive>
             </configuration>
+            -->
           </execution>
         </executions>
       </plugin>

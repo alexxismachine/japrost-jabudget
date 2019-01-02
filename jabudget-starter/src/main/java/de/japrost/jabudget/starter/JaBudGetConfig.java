@@ -51,10 +51,16 @@ public class JaBudGetConfig {
 	@Bean
 	Serialization serialization() throws IOException {
 		URL resource = this.getClass().getResource("/");
-		final File parent = new File(resource.getPath());
+		final  File parent;
+		if (resource != null) {
+			parent = new File(resource.getPath());
+		} else {
+			parent = new File(System.getProperty("user.home")+"/.JaProSt");
+		}
 		parent.mkdirs();
 		final File file = new File(parent, "JaBudGet-DomainStore.xml");
 		file.createNewFile();
 		return new XStreamSerialization(new LazyFileInputStream(file), new LazyFileOutputStream(file));
 	}
+
 }

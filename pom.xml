@@ -33,7 +33,7 @@
     <!-- dependency versions -->
     <spring.version>5.0.9.RELEASE</spring.version>
     <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
-    <vaadin.version>8.5.2</vaadin.version>
+    <vaadin.version>10.0.9</vaadin.version>
     <!-- dependency versions test -->
     <version.servlet-api>4.0.1</version.servlet-api>
   </properties>

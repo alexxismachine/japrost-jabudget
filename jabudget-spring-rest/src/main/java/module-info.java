@@ -5,4 +5,6 @@ module de.japrost.jabudget.spring.rest {
     requires spring.web;
     requires de.japrost.jabudget.domain;
     requires de.japrost.jabudget.service;
+
+    opens de.japrost.jabudget.spring.config to spring.core;
 }

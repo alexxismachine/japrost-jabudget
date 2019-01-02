@@ -1,17 +1,16 @@
 package de.japrost.jabudget.vaadin.spring;
 
-import com.vaadin.data.HasValue.ValueChangeEvent;
-import com.vaadin.data.provider.ListDataProvider;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.Grid.ItemClick;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.HasValue;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.ListDataProvider;
+import com.vaadin.flow.data.selection.SelectionEvent;
+import com.vaadin.flow.router.Route;
 
 import de.japrost.jabudget.domain.DomainException;
 import de.japrost.jabudget.domain.account.Account;
@@ -22,8 +21,8 @@ import de.japrost.jabudget.service.SerializationService;
  * Main UI for JaBudget.
  */
 // this is a hack just to test main functionality
-@SpringUI()
-public class JaBudGetUI extends UI {
+@Route("")
+public class JaBudGetUI extends HorizontalLayout {
 
 	private static final long serialVersionUID = 1L;
 
@@ -50,78 +49,67 @@ public class JaBudGetUI extends UI {
 	public JaBudGetUI(final AccountService accountService, final SerializationService serializationService) {
 		this.accountService = accountService;
 		this.serializationService = serializationService;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * <strong>This implementation</strong> initializes all there currently is available (a SPA with a single page ;-).
-	 */
-	@Override
-	protected void init(final VaadinRequest request) {
-		final HorizontalLayout mainLayout = new HorizontalLayout();
-		this.setContent(mainLayout);
-		mainLayout.setSizeFull();
-		mainLayout.addComponent(initAccountOverview());
-		mainLayout.addComponent(initAccountForm());
-		mainLayout.addComponent(initSerialization());
+		setSizeFull();
+		add(initAccountOverview());
+		add(initAccountForm());
+		add(initSerialization());
 	}
 
 	private VerticalLayout initAccountOverview() {
 		final VerticalLayout layout = new VerticalLayout();
 		final Grid<Account> accounts = new Grid<>(Account.class);
-		accounts.setCaption("Accounts"); // I18N?
+		// accounts.setCaption("Accounts"); // I18N?
 		accounts.setColumns("id", "name");
 		accountData = new ListDataProvider<>(accountService.retrieveAll());
 		accounts.setDataProvider(accountData);
-		accounts.addItemClickListener(this::itemClicked);
-		layout.addComponent(accounts);
+		accounts.addSelectionListener(this::itemClicked);
+		layout.add(accounts);
 		return layout;
 	}
 
-	private void itemClicked(final ItemClick<Account> e) {
-		selectedAccount = e.getItem();
+	private void itemClicked(final SelectionEvent<Grid<Account>, Account> e) {
+		selectedAccount = e.getFirstSelectedItem().get();
 		newId.setValue(selectedAccount.getId());
 		newName.setValue(selectedAccount.getName());
-		newAccount.setCaption("Update");
+		newAccount.setText("Update");
 		delete.setEnabled(true);
 	}
 
 	private FormLayout initAccountForm() {
 		final FormLayout newAccountLayout = new FormLayout();
 		newId = new TextField();
-		newId.setCaption("id");
+		newId.setLabel("id");
 		newId.setRequiredIndicatorVisible(true);
 		newId.addValueChangeListener(this::newIdValueChanged);
-		newAccountLayout.addComponent(newId);
+		newAccountLayout.add(newId);
 		newName = new TextField();
-		newName.setCaption("name");
-		newAccountLayout.addComponent(newName);
+		newName.setLabel("name");
+		newAccountLayout.add(newName);
 		newAccount = new Button();
-		newAccount.setCaption("New");
+		newAccount.setText("New");
 		newAccount.setEnabled(false);
 		newAccount.addClickListener(this::createNewAccount);
-		newAccountLayout.addComponent(newAccount);
+		newAccountLayout.add(newAccount);
 		clear = new Button();
-		clear.setCaption("Clear");
+		clear.setText("Clear");
 		clear.setEnabled(false);
 		clear.addClickListener(this::clearAccount);
-		newAccountLayout.addComponent(clear);
+		newAccountLayout.add(clear);
 		delete = new Button();
-		delete.setCaption("Delete");
+		delete.setText("Delete");
 		delete.setEnabled(false);
 		delete.addClickListener(this::deleteAccount);
-		newAccountLayout.addComponent(delete);
+		newAccountLayout.add(delete);
 		return newAccountLayout;
 	}
 
-	private void clearAccount(final Button.ClickEvent event) {
+	private void clearAccount(final ClickEvent<Button> event) {
 		newId.clear();
 		newName.clear();
-		newAccount.setCaption("New");
+		newAccount.setText("New");
 	}
 
-	private void deleteAccount(final Button.ClickEvent event) {
+	private void deleteAccount(final ClickEvent<Button> event) {
 		final Boolean erased = accountService.erase(newId.getValue());
 		if (erased) {
 			accountData.getItems().remove(selectedAccount);
@@ -129,15 +117,15 @@ public class JaBudGetUI extends UI {
 			// clear after remove since the newIdValueChanged is faster and sets selectedAccount to null
 			newId.clear();
 			newName.clear();
-			newAccount.setCaption("New");
+			newAccount.setText("New");
 		}
 	}
 
-	private void createNewAccount(final Button.ClickEvent event) {
+	private void createNewAccount(final ClickEvent<Button> event) {
 		Account account;
 		try {
 			// this is a hack just to test main functionality
-			if (newAccount.getCaption().equals("New")) {
+			if (newAccount.getText().equals("New")) {
 				account = accountService.create(Account.Builder.builder(newId.getValue()).setName(newName.getValue()).build());
 				accountData.getItems().add(account);
 			} else {
@@ -151,11 +139,11 @@ public class JaBudGetUI extends UI {
 		}
 		newId.clear();
 		newName.clear();
-		newAccount.setCaption("New");
+		newAccount.setText("New");
 		accountData.refreshAll();
 	}
 
-	private void newIdValueChanged(final ValueChangeEvent<String> event) {
+	private void newIdValueChanged(final HasValue.ValueChangeEvent<String> event) {
 		if (event.getValue().length() == 0) {
 			newAccount.setEnabled(false);
 			clear.setEnabled(false);
@@ -170,16 +158,17 @@ public class JaBudGetUI extends UI {
 	private VerticalLayout initSerialization() {
 		final VerticalLayout layout = new VerticalLayout();
 		impoort = new Button();
-		impoort.setCaption("Import");
+		impoort.setText("Import");
+
 		impoort.addClickListener(e -> {
 			serializationService.deserialize();
 			reloadAccounts();
 		});
-		layout.addComponent(impoort);
+		layout.add(impoort);
 		export = new Button();
-		export.setCaption("Export");
+		export.setText("Export");
 		export.addClickListener(e -> serializationService.serialize());
-		layout.addComponent(export);
+		layout.add(export);
 		return layout;
 	}
 
