@@ -28,15 +28,6 @@
             <goals>
               <goal>single</goal>
             </goals>
-            <!--
-            <configuration>
-              <archive>
-                <manifestEntries>
-                  <Automatic-Module-Name>de.japrost.jabudget.domain.fixtures</Automatic-Module-Name>
-                </manifestEntries>
-              </archive>
-            </configuration>
-            -->
           </execution>
         </executions>
       </plugin>

@@ -4,11 +4,16 @@
   alexxismachine
   -----
  
-JaBudget Starter
+JaBudGet Starter
 
-  JaBudget Starter bildet die unterschiedlichen Start-Konfigurationen ab.
+  JaBudGet Starter bildet die unterschiedlichen Start-Konfigurationen ab.
   
   Die Klasse <<<de.japrost.jabudget.starter.JaBudGetStarter>>> startet sowohl die 
   {{{../vaadin-spring/index.html}Vaadin-Spring-}} als auch die 
   {{{../spring-rest/index.html}Spring-Rest-Implementierung}}
   gegen ein In-Memory-Repository.
+
+* JPMS
+
+  JaBudGet Starter ist nicht als Java-Modul implementiert, da die Konfiguration der abhängigen
+  Komponenten noch sehr aufwändig ist und entsprechende Ausnahmen zur Laufzeit benötigt.

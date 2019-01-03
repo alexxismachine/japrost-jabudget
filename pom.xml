@@ -4,7 +4,7 @@
   <parent>
     <groupId>de.japrost</groupId>
     <artifactId>japrost-java-parent</artifactId>
-    <version>11.0.2-SNAPSHOT</version>
+    <version>11.0.2</version>
   </parent>
 
   <groupId>de.japrost.jabudget</groupId>

@@ -4,6 +4,17 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
     <release
+      version="0.0.3"
+      description="Vaadin 10"
+      date="2019-01-03">
+      <action type="remove">
+        No JPMS for starter.
+      </action>
+      <action type="update">
+        Use Vaadin 10.
+      </action>
+    </release>
+    <release
       version="0.0.2"
       description="Java 11"
       date="2018-12-29">

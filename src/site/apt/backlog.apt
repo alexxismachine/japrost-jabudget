@@ -8,7 +8,7 @@ Technik
 
   * Docker verwenden
   
-  * maven wrapper
+  * maven wrapper?
 
 Domain
 
@@ -44,8 +44,6 @@ Spring Rest
   * Konfigurierbarkeit der Pfade / Pfade über Konstanten bzw. Enums definieren.
   
 Vaadin Spring
-
-  * Update auf Vaadin 10
 
   * Verwenden von Data-Binding
 

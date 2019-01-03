@@ -1,11 +1,17 @@
   -----
-  JaBudget  Vaadin Spring - Java Programming Studio
+  JaBudGet  Vaadin Spring - Java Programming Studio
   -----
   alexxismachine
   -----
  
-JaBudget Vaadin Spring
+JaBudGet Vaadin Spring
 
-  JaBudget Vaadin Spring exponiert die Business Services mit einer Vaadin-Anwendung.   
+  JaBudGet Vaadin Spring exponiert die Business Services mit einer Vaadin-Anwendung.
 
+* Spring-Konfiguration
+
+  Da die Konfiguration für Vaadin-Spring in diesem Projekt liegt,
+  ist es notwendig, eine Spring-<<<@Configuration>>>-Klasse zu erstellen,
+  die darüber hinaus mit <<<@EnableVaadin>>> annotiert ist
+  und als <<<value>>> das Base-Package der Vaadin-Komponenten enthält.
   
