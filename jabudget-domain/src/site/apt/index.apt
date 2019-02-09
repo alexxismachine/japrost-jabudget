@@ -12,10 +12,27 @@ JaBudget Domain
 
 ~~ Separate Builder-Klasse?
 
-* Account (Konto)
+* Domain-Objekte
+
+** Entiäten
+
+  Jede Entität hat eine eindeutige Identität (<<<id>>>) die das Objekt identifiziert.
+
+  <<<equals()>>> und <<<hashCode()>>> basieren auf der <<<id>>>.
+
+** Aggregate Member
+
+  Aggregate Members sind Value-Objekte, die zusätzlich einen Schlüssel (<<<key>>>)
+  haben, der der sie eindeutig identifiziert.
+  Der Schlüssel wird aus der <<<id>>> des Aggregate-Root und einem <<<code>>> zusammengesetzt.
+
+  <<<equals()>>> und <<<hashCode()>>> basieren auf dem <<<key>>>.
+
+* Modell
+
+** Account (Konto): Entität
 
   Ein Account wird anhand seiner <<<id>>> identifiziert. 
-  Auf diesem Feld basieren auch <<<equals()>>> und <<<hashCode()>>>.
   Ein Account hat eine Währung (noch nicht modelliert).
   Ein Account hat zu einem Datum einen Stand. (noch nicht modelliert).
   Anhand von Datum und Stand kann mit den Entries der Stand zu einem anderen Datum ermittelt werden.
@@ -26,13 +43,11 @@ JaBudget Domain
 
 ~~ Verwenden einer AccountId-Klasse?
 
-* Entry (Buchung)
+** Entry (Buchung): Aggregate Member
 
   Ein Entry ist eine Buchung auf einem Account.
-  Ein Entry hat eine eine eigene id, ist darüber referenzierbar (Entität).
-  Ein Entry hat eine Referenz zu seinem Account (AccountId).
   (Zu einem Entry kann es einen "gegen Entry" geben, der auf dem "gegen Account" liegt.
-  Entry und gegen Entry sind unterschiedliche Entitäten (haben unterschiedlieche id und AccountId)
+  Entry und gegen Entry sind unterschiedliche Entitäten (haben unterschiedliche id und AccountId)
   Eine Beziehung zwischen beiden ist aktuell nicht vorgesehen.)
   Ein Entry hat einen Betrag, der positiv oder negativ sein kann.
   Der Betrag hat 2? Nachkommastellen.

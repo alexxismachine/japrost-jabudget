@@ -45,7 +45,18 @@ JaBudget
   * <<vaadin-spring>> veröffentlicht die aus <<service>> erhaltenen <<domain>>-Objekte als Web-UI
   
   * <<starter>> ist die Spring-Boot-Applikation, die <<spring-rest>> und <<vaadin-spring>> antreibt.
-  
+
+* Dokumentation
+
+  Für Felder wird das Java-Doc nur an an den Getter geschrieben.
+  Es wird nicht an die Deklaration geschrieben, auch wenn dann Tools wie JAutoDoc die in die
+  getter und setter übertragen könnten, da es keine Wiederholungen und Neugenerierungen geben soll.
+  Es wird nicht an den Setter geschrieben, da dieser nicht immer vorhanden ist,
+  und wenn er vorhanden ist, soll es keine Wiederholungen geben.
+
+  Bei Konstruktoren, die Felder setzen, die Getter besitzen, wird der Parmeter nicht dokumentiert,
+  da die Dokumentation beim Getter ist.
+
 ~~ Unterschiedliche Namen für die Operationen in unterschiedlichen Schichten 
 ~~ GET / retrieve / find, POST / ???() / create, PUT / ???(modify) / update, DELETE / erase / delete?
 ~~ Über den Name weiß man gleich, in welcher Schicht man sich bewegt.

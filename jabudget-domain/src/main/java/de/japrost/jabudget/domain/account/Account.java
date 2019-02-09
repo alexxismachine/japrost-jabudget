@@ -3,6 +3,7 @@ package de.japrost.jabudget.domain.account;
 import static java.util.Objects.requireNonNull;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -12,9 +13,7 @@ import java.util.Optional;
 public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	/** The identity of an Account. MUST NOT be {@code null}. */
 	private final String id;
-	/** The given name of an Account. */
 	private String name;
 
 	/**
@@ -28,27 +27,31 @@ public class Account implements Serializable {
 	}
 
 	/**
-	 * Gets the identity of an Account. MUST NOT be {@code null}.
+	 * Gets the identity of the Account.
 	 *
-	 * @return the identity of an Account
+	 * @return the identity of an Account.
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * Gets the given name of an Account.
+	 * Gets the given name of the Account.
 	 *
-	 * @return the given name of an Account
+	 * @return the given name. If no name is given returns an empty String.
 	 */
 	public String getName() {
-		return name;
+		if (Objects.nonNull(name)) {
+			return name;
+		} else {
+			return "";
+		}
 	}
 
 	/**
-	 * Sets the given name of an Account.
+	 * Sets the given name of the Account.
 	 *
-	 * @param name the new given name of an Account
+	 * @param name the new given name. SHOULD NOT BE {@code null}.
 	 */
 	public void setName(final String name) {
 		this.name = name;
@@ -104,9 +107,13 @@ public class Account implements Serializable {
 	 */
 	public static class Builder {
 
-		/** The identity of an Account. MUST NOT be {@code null}. */
+		/**
+		 * The identity of an Account. MUST NOT be {@code null}.
+		 */
 		private String id;
-		/** The given name of an Account. */
+		/**
+		 * The given name of an Account.
+		 */
 		private String name;
 
 		/**

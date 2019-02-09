@@ -12,11 +12,16 @@ Technik
 
 Domain
 
-  * Technische ID, Fachlicher CODE?
+  * AccountId als eigene Klasse!
+
+  * ID, CODE, KEY technisch, Name fachlich
 
   * Umstellen der Argument-Prüfung von <<<NPE>>> auf <<<IAE>>>.
   
-  * Zweite Entität (AccountLine)
+  * Zweite Entität (Entry (Buchung))
+
+  * "RemoteAccount": Wenn ich einen Account von remote bekommen, muss ich
+    die erhaltene ID des Accounts mit einem CODE erweitern, der die ID wieder unique macht.
   
 Repository
 
