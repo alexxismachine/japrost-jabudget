@@ -49,10 +49,11 @@ JaBudget Domain
   (Zu einem Entry kann es einen "gegen Entry" geben, der auf dem "gegen Account" liegt.
   Entry und gegen Entry sind unterschiedliche Entitäten (haben unterschiedliche id und AccountId)
   Eine Beziehung zwischen beiden ist aktuell nicht vorgesehen.)
+  Ein Entry hat einen für das Konto eindeutigen Code (wie wird die Eindeutigkeit sicher gestellt?).
   Ein Entry hat einen Betrag, der positiv oder negativ sein kann.
   Der Betrag hat 2? Nachkommastellen.
   Die Währung des Betrags eines Entries wird vom Account abegleitet (noch nicht modelliert)
-  Ein Entry hat eine Beschreibung.
+  Ein Entry hat eine Beschreibung (subject).
   Ein Entry hat ein Valuta-Datum.
   Ein Entry hat ein Buchungs-Datum.
   Ein Entry hat <keinen> Kontostand!

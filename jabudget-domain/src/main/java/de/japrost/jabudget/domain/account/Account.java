@@ -107,13 +107,7 @@ public class Account implements Serializable {
 	 */
 	public static class Builder {
 
-		/**
-		 * The identity of an Account. MUST NOT be {@code null}.
-		 */
 		private String id;
-		/**
-		 * The given name of an Account.
-		 */
 		private String name;
 
 		/**

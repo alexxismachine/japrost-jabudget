@@ -21,7 +21,7 @@ public class Entry extends AggregateMember implements Serializable {
 	 */
 	public Entry(String accountId, String code, String subject) {
 		requireNonNull(accountId, "'accountId' MUST NOT be null.");
-		requireNonNull(code, "'id' MUST NOT be null.");
+		requireNonNull(code, "'code' MUST NOT be null.");
 		requireNonNull(subject, "'subject' MUST NOT be null.");
 		this.accountId = accountId;
 		this.code = code;

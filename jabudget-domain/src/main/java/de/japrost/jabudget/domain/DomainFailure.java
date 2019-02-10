@@ -13,6 +13,10 @@ public enum DomainFailure {
 	 */
 	MISSING_ENTITY,
 	/**
+	 * The object to operate on has reference to an entity that does not exist.
+	 */
+	MISSING_ENTITY_REFERENCE,
+	/**
 	 * The entity to locate does not exist. E.g. when try finding an existing one.
 	 */
 	ENTITY_NOT_AVAILABLE;

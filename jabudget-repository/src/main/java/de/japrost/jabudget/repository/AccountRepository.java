@@ -6,6 +6,7 @@ import java.util.Set;
 import de.japrost.jabudget.domain.DomainException;
 import de.japrost.jabudget.domain.DomainFailure;
 import de.japrost.jabudget.domain.account.Account;
+import de.japrost.jabudget.domain.account.Entry;
 
 /**
  * The repository for {@link Account}s.
@@ -31,7 +32,8 @@ public interface AccountRepository {
 	Account update(Account account) throws DomainException;
 
 	/**
-	 * Replace all {@link Account}s with the given. Intended for imports.
+	 * Replace all {@link Account}s with the given. Intended for imports.<br>
+	 * Also replaces clears the {@link Entry}s of all accounts.
 	 *
 	 * @param accounts the {@link Account}s to fill the repository.
 	 */
@@ -61,4 +63,15 @@ public interface AccountRepository {
 	 *         entity to delete did exist. Returns {@link Boolean#FALSE} if the entity could not be deleted.
 	 */
 	Boolean delete(String accountId);
+
+	/**
+	 * Create a new {@link Entry} with the given values.
+	 *
+	 * @param entry the entry to create.
+	 * @return The entry as stored in the repository.
+	 * @throws DomainException with {@link DomainFailure#DUPLICATE_ENTITY} if the given entry already exists.
+	 * @throws DomainException with {@link DomainFailure#MISSING_ENTITY_REFERENCE} if the account for the entry does not exists.
+	 */
+	Entry create(Entry entry) throws DomainException;
+
 }
