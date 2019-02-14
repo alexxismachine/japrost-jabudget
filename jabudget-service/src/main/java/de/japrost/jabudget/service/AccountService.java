@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import de.japrost.jabudget.domain.DomainException;
+import de.japrost.jabudget.domain.DomainFailure;
 import de.japrost.jabudget.domain.account.Account;
+import de.japrost.jabudget.domain.account.Entry;
 import de.japrost.jabudget.repository.AccountRepository;
 
 /**
@@ -75,6 +77,19 @@ public class AccountService {
 	 */
 	public Boolean erase(final String id) {
 		return accountRepository.delete(id);
+	}
+
+	/**
+	 * Create a new {@link Entry} with the given values.
+	 *
+	 * @param entry the entry to create.
+	 * @return The entry as stored in the repository.
+	 * @throws DomainException with {@link DomainFailure#DUPLICATE_ENTITY} if the given entry already exists.
+	 * @throws DomainException with {@link DomainFailure#MISSING_ENTITY_REFERENCE} if the account for the entry does not exists.
+	 */
+	public Entry create(final Entry entry) throws DomainException {
+		// TODO who creates the Entry-Code.
+		return accountRepository.create(entry);
 	}
 
 }

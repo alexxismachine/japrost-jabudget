@@ -33,6 +33,17 @@ curl -H "Content-Type: application/json" -d '{"id":4711, "name":"peter"}' http:/
   Die im Account enthaltene <<<id>>> wird ignoriert.
   Ist die Entität nicht vorhanden wird der HttpStatus <<<404>>> zurückgeliefert.
 
+*** <<<POST>>> <<</accounts/\{id}/entries>>>
+
+  Erstellen eines Accounts-Entries.
+  Liefert die erstellte Entität zurück.
+  Ist die Entität bereits vorhanden wird der HttpStatus <<<422>>> zurückgeliefert.
+  TODO Status, wenn Account nicht vorhanden.
+
+---
+curl -H "Content-Type: application/json" -d '{"accountId":4711, "code":"EE1", "subject":"Umbuchung" }' http://localhost:8080/rest/accounts/4711/entries
+---
+
 ** Entitäten lesen
 
 *** <<<GET>>> <<</accounts>>>

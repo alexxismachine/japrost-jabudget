@@ -96,7 +96,7 @@ public class AccountControllerTest {
 		// given
 		final Account.Builder builder = accountFixtures.createDefaultBuilder();
 		final Account result = builder.build();
-		Mockito.when(accountService.create(Mockito.any())).thenReturn(result);
+		Mockito.when(accountService.create(Mockito.any(Account.class))).thenReturn(result);
 		// when
 		final Account actual = cut.create(builder);
 		//then
