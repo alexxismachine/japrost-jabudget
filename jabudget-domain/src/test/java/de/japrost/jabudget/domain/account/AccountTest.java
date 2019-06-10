@@ -83,7 +83,7 @@ public class AccountTest {
 		mapping.put(idConstructor, Arrays.asList("id"));
 		final PropertiesAndValues defaults = new PropertiesAndValues();
 		defaults.put("id", "an id");
-		defaults.put("name", null);
+		defaults.put("name", "");
 		final PropertiesAndValues other = new PropertiesAndValues();
 		other.put("id", "an other id");
 		other.put("name", "a name");
@@ -173,7 +173,7 @@ public class AccountTest {
 	}
 
 	/**
-	 * Builder creates empty optional on not all required fields are set. 
+	 * Builder creates empty optional on not all required fields are set.
 	 */
 	@Test
 	public void builder_optional_empty() {
@@ -184,8 +184,9 @@ public class AccountTest {
 		// then
 		assertThat(actual).isEmpty();
 	}
+
 	/**
-	 * Builder creates filled optional on all required fields are set. 
+	 * Builder creates filled optional on all required fields are set.
 	 */
 	@Test
 	public void builder_optional_filled() {
