@@ -3,7 +3,7 @@
   <parent>
     <groupId>de.japrost.jabudget</groupId>
     <artifactId>jabudget</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
   </parent>
   <artifactId>jabudget-service</artifactId>
   
