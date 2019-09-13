@@ -32,8 +32,9 @@
     <version.maven-enforcer-plugin>3.0.0-M2</version.maven-enforcer-plugin>
     <!-- dependency versions -->
     <spring.version>5.1.4.RELEASE</spring.version>
-    <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+    <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
     <vaadin.version>10.0.9</vaadin.version>
+    <version.xstream>1.4.11</version.xstream>
     <!-- dependency versions test -->
     <version.servlet-api>4.0.1</version.servlet-api>
   </properties>
@@ -132,6 +133,22 @@
   </dependencies>
   <dependencyManagement>
     <dependencies>
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>${version.xstream}</version>
+      <exclusions>
+        <!-- exclude xpp since it has split package -->
+        <exclusion>
+          <groupId>xpp3</groupId>
+          <artifactId>xpp3_min</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xmlpull</groupId>
+          <artifactId>xmlpullpp3_min</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-bom</artifactId>
