@@ -4,6 +4,20 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
     <release
+      version="0.1.0"
+      description="Entry"
+      date="2019-09-13">
+      <action type="remove">
+        Remove Java Modules.
+      </action>
+      <action type="update">
+        Use semantic versioning.
+      </action>
+      <action type="update">
+        Spring boot 2.1.2.
+      </action>
+    </release>
+    <release
       version="0.0.3"
       description="Vaadin 10"
       date="2019-01-03">
