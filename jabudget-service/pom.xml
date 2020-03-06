@@ -31,10 +31,9 @@
     <!-- TEST -->
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>jabudget-domain</artifactId>
+      <artifactId>jabudget-domain-fixtures</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
-      <type>test-jar</type>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>

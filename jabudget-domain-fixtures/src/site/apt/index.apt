@@ -1,0 +1,12 @@
+  -----
+  JaBudget Domain Fixtures - Java Programming Studio
+  -----
+  alexxismachine
+  -----
+ 
+JaBudget Domain Fixtures
+
+  Die JaBudget Domain Fixtures enthalten Klassen zur vereinfachten Erzeugung von Testdaten.
+  
+  Die Fixtures liegen alle unter <<<fixtures>>> unterhalb des Basispackages, 
+  damit es nicht zu Paket-Überschneidungen kommen kann.

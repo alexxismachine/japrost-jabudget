@@ -24,6 +24,7 @@
     <module>jabudget-repository</module>
     <module>jabudget-starter</module>
     <module>jabudget-serialization</module>
+    <module>jabudget-domain-fixtures</module>
   </modules>
 
   <properties>
