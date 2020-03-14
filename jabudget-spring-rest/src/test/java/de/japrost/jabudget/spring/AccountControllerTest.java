@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import de.japrost.jabudget.domain.DomainException;
@@ -28,7 +28,7 @@ public class AccountControllerTest {
 	/**
 	 * Set up each test.
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() {
 		accountService = Mockito.mock(AccountService.class);
 		cut = new AccountController(accountService);
@@ -38,7 +38,7 @@ public class AccountControllerTest {
 	 * Simple delegation.
 	 */
 	@Test
-	public void retrieveAllDelegates() {
+	 void retrieveAllDelegates() {
 		// given
 		final List<Account> result = new ArrayList<>();
 		Mockito.when(accountService.retrieveAll()).thenReturn(result);
@@ -55,7 +55,7 @@ public class AccountControllerTest {
 	 * @throws DomainException never
 	 */
 	@Test
-	public void retrieveByIdDelegates() throws DomainException {
+	 void retrieveByIdDelegates() throws DomainException {
 		// given
 		final Account account = accountFixtures.createDefault();
 		Mockito.when(accountService.retrieveById(AccountFixtureValues.ACCOUNT_DEF_ID)).thenReturn(Optional.of(account));
@@ -72,7 +72,7 @@ public class AccountControllerTest {
 	 * @throws DomainException never
 	 */
 	@Test
-	public void retrieveByIdFailsOnMissingEntity() throws DomainException {
+	 void retrieveByIdFailsOnMissingEntity() throws DomainException {
 		// given
 		Mockito.when(accountService.retrieveById(AccountFixtureValues.ACCOUNT_DEF_ID))
 				.thenReturn(Optional.ofNullable(null));
@@ -92,7 +92,7 @@ public class AccountControllerTest {
 	 * @throws DomainException never
 	 */
 	@Test
-	public void createDelegates() throws DomainException {
+	 void createDelegates() throws DomainException {
 		// given
 		final Account.Builder builder = accountFixtures.createDefaultBuilder();
 		final Account result = builder.build();
@@ -110,7 +110,7 @@ public class AccountControllerTest {
 	 * @throws DomainException never
 	 */
 	@Test
-	public void updateDelegates() throws DomainException {
+	 void updateDelegates() throws DomainException {
 		// given
 		final Account.Builder builder = accountFixtures.createAlternateBuilder();
 		final Account result = accountFixtures.createDefault();
@@ -126,7 +126,7 @@ public class AccountControllerTest {
 	 * Simple delegation.
 	 */
 	@Test
-	public void deleteDelegates() {
+	 void deleteDelegates() {
 		// given
 		// when
 		cut.delete(AccountFixtureValues.ACCOUNT_DEF_ID);

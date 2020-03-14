@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the {@link LazyFileOutputStream}.
@@ -20,7 +20,7 @@ public class LazyFileOutputStreamTest {
 	/**
 	 * Set cut and helping reader with a file.
 	 */
-	@Before
+	@BeforeEach
 	public void initCut() {
 		final File file = new File("target/LazyFile.txt");
 		cut = new LazyFileOutputStream(file);
@@ -32,7 +32,7 @@ public class LazyFileOutputStreamTest {
 	 *
 	 * @throws Exception never.
 	 */
-	@After
+	@AfterEach
 	public void closeCut() throws Exception {
 		cut.close();
 		helper.close();
@@ -44,7 +44,7 @@ public class LazyFileOutputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testWrite() throws Exception {
+	 void testWrite() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -61,7 +61,7 @@ public class LazyFileOutputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testWrite_twice() throws Exception {
+	 void testWrite_twice() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when

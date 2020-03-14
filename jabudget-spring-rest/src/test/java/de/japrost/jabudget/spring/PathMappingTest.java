@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the {@link PathMapping}.
@@ -18,7 +18,7 @@ public class PathMappingTest implements PathMapping {
 	 * @throws Exception never
 	 */
 	@Test
-	public void noDuplicateNames() throws Exception {
+	 void noDuplicateNames() throws Exception {
 		final Field[] declaredFields = PathMapping.class.getDeclaredFields();
 		final Set<String> path = new HashSet<>();
 		for (final Field field : declaredFields) {

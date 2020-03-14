@@ -3,8 +3,8 @@ package de.japrost.jabudget.spring;
 import java.util.Arrays;
 import java.util.Optional;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -29,7 +29,7 @@ public class AccountControllerIT {
 	/**
 	 * Set up each test.
 	 */
-	@Before
+	@BeforeEach
 	public void setup() {
 		accountService = Mockito.mock(AccountService.class);
 		final ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver = new ExceptionHandlerExceptionResolver();
@@ -44,7 +44,7 @@ public class AccountControllerIT {
 	 * @throws Exception never
 	 */
 	@Test
-	public void accounts_delegates() throws Exception {
+	 void accounts_delegates() throws Exception {
 		// given
 		// when
 		mockMvc.perform(MockMvcRequestBuilders.get(PathMapping.BASE + PathMapping.ACCOUNTS));
@@ -58,7 +58,7 @@ public class AccountControllerIT {
 	 * @throws Exception never
 	 */
 	@Test
-	public void accounts_id_delegates() throws Exception {
+	 void accounts_id_delegates() throws Exception {
 		// given
 		final Account account = accountFixtures.createDefault();
 		Mockito.when(accountService.retrieveById(account.getId())).thenReturn(Optional.of(account));

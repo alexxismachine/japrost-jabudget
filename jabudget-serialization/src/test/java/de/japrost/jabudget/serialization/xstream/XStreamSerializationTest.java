@@ -6,8 +6,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.japrost.jabudget.serialization.DomainStore;
 import de.japrost.jabudget.serialization.DomainStoreFixture;
@@ -30,7 +30,7 @@ public class XStreamSerializationTest {
 	 *
 	 * @throws Exception on failure
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		defaultDomainStore = new FileInputStream(new File(resourcesDirectory, DEFAULT_DOMAINSTORE_FILE_NAME));
 		multiDomainStore = new FileInputStream(new File(resourcesDirectory, MULTI_DOMAINSTORE_FILE_NAME));
@@ -40,7 +40,7 @@ public class XStreamSerializationTest {
 	 * Test main serialization features.
 	 */
 	@Test
-	public void serialize_default() {
+	 void serialize_default() {
 		// given
 		cut = new XStreamSerialization(defaultDomainStore, out);
 		final DomainStore domainStore = DomainStoreFixture.defaultDomainStore();
@@ -55,7 +55,7 @@ public class XStreamSerializationTest {
 	 * Test advanced serialization features.
 	 */
 	@Test
-	public void serialize_multi() {
+	 void serialize_multi() {
 		// given
 		cut = new XStreamSerialization(multiDomainStore, out);
 		final DomainStore domainStore = DomainStoreFixture.multiDomainStore();
@@ -70,7 +70,7 @@ public class XStreamSerializationTest {
 	 * Test main deserialization features.
 	 */
 	@Test
-	public void deserialize_default() {
+	 void deserialize_default() {
 		// given
 		cut = new XStreamSerialization(defaultDomainStore, out);
 		// when
@@ -84,7 +84,7 @@ public class XStreamSerializationTest {
 	 * Test advanced deserialization features.
 	 */
 	@Test
-	public void deserialize_multi() {
+	 void deserialize_multi() {
 		// given
 		cut = new XStreamSerialization(multiDomainStore, out);
 		// when

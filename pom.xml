@@ -1,4 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -31,6 +34,7 @@
     <japrost.site.locales>de</japrost.site.locales>
     <!-- plugin versions -->
     <version.maven-enforcer-plugin>3.0.0-M2</version.maven-enforcer-plugin>
+    <version.maven-surefire-plugin>3.0.0-M4</version.maven-surefire-plugin>
     <!-- dependency versions -->
     <spring.version>5.1.4.RELEASE</spring.version>
     <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
@@ -38,6 +42,7 @@
     <version.xstream>1.4.11</version.xstream>
     <!-- dependency versions test -->
     <version.servlet-api>4.0.1</version.servlet-api>
+    <version.junit>5.6.0</version.junit>
   </properties>
 
   <build>
@@ -51,6 +56,11 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${version.maven-surefire-plugin}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -78,7 +88,6 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.basedir}/src/test/fixtures</source>
                 <source>${project.basedir}/src/it/java</source>
               </sources>
             </configuration>
@@ -108,46 +117,24 @@
     </plugins>
   </build>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.outsideMyBox</groupId>
-      <artifactId>testUtils</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
   <dependencyManagement>
     <dependencies>
-    <dependency>
-      <groupId>com.thoughtworks.xstream</groupId>
-      <artifactId>xstream</artifactId>
-      <version>${version.xstream}</version>
-      <exclusions>
-        <!-- exclude xpp since it has split package -->
-        <exclusion>
-          <groupId>xpp3</groupId>
-          <artifactId>xpp3_min</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>xmlpull</groupId>
-          <artifactId>xmlpullpp3_min</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+      <dependency>
+        <groupId>com.thoughtworks.xstream</groupId>
+        <artifactId>xstream</artifactId>
+        <version>${version.xstream}</version>
+        <exclusions>
+          <!-- exclude xpp since it has split package -->
+          <exclusion>
+            <groupId>xpp3</groupId>
+            <artifactId>xpp3_min</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>xmlpull</groupId>
+            <artifactId>xmlpullpp3_min</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-bom</artifactId>
@@ -166,6 +153,18 @@
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
         <version>${version.servlet-api}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${version.junit}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-params</artifactId>
+        <version>${version.junit}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>

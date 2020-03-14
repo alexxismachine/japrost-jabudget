@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.outsideMyBox.testUtils.BeanLikeTester;
 import org.outsideMyBox.testUtils.BeanLikeTester.ConstructorSignatureAndPropertiesMapping;
 import org.outsideMyBox.testUtils.BeanLikeTester.PropertiesAndValues;
@@ -21,7 +21,7 @@ public class AccountTest {
 	 * The id of an {@link Account} MUST NOT be {@code null}.
 	 */
 	@Test
-	public void id_mustNotBeNull() {
+	 void id_mustNotBeNull() {
 		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Account(null))
 				.withMessage("'id' MUST NOT be null.");
@@ -31,7 +31,7 @@ public class AccountTest {
 	 * Two {@link Account}s are equal by their id.
 	 */
 	@Test
-	public void equals_onId() {
+	 void equals_onId() {
 		final Account one = new Account("one");
 		one.setName("one name");
 		final Account two = new Account("two");
@@ -48,7 +48,7 @@ public class AccountTest {
 	 * {@link Account}s are not equal to {@code null} or an instance of an other class.
 	 */
 	@Test
-	public void equals_UnHappy() {
+	 void equals_UnHappy() {
 		final Account one = new Account("one");
 		one.setName("one name");
 		assertThat(one).isNotEqualTo(null);
@@ -59,7 +59,7 @@ public class AccountTest {
 	 * An {@link Account}s hash code is calculated only on the id.
 	 */
 	@Test
-	public void hashCode_onId() {
+	 void hashCode_onId() {
 		final Account one = new Account("one");
 		one.setName("one name");
 		final Account two = new Account("two");
@@ -76,7 +76,7 @@ public class AccountTest {
 	 * Test default values, getters and setters and toString.
 	 */
 	@Test
-	public void beanLike() {
+	 void beanLike() {
 		// given
 		final ConstructorSignatureAndPropertiesMapping mapping = new ConstructorSignatureAndPropertiesMapping();
 		final List<Class<?>> idConstructor = Arrays.asList(String.class);
@@ -98,7 +98,7 @@ public class AccountTest {
 	 * Builder does not allow {@code null} as id.
 	 */
 	@Test
-	public void builder_id_mustNotBeNull() {
+	 void builder_id_mustNotBeNull() {
 		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Account.Builder().build())
 				.withMessage("'id' MUST NOT be null.");
@@ -117,7 +117,7 @@ public class AccountTest {
 	 * Empty Builder sets all values.
 	 */
 	@Test
-	public void builder_empty_setsValues() {
+	 void builder_empty_setsValues() {
 		// given
 		Account.Builder builder = Account.Builder.builder().setId("an id").setName("a name");
 		// when
@@ -131,7 +131,7 @@ public class AccountTest {
 	 * Required field Builder sets all values.
 	 */
 	@Test
-	public void builder_requiredFields_setsValues() {
+	 void builder_requiredFields_setsValues() {
 		// given
 		Account.Builder builder = Account.Builder.builder("an id").setName("a name");
 		// when
@@ -145,7 +145,7 @@ public class AccountTest {
 	 * Copy Builder sets all values.
 	 */
 	@Test
-	public void builder_Copy_setsValues() {
+	 void builder_Copy_setsValues() {
 		// given
 		Account example = new Account("an id");
 		example.setName("a name");
@@ -161,7 +161,7 @@ public class AccountTest {
 	 * Copy Builder may be null.
 	 */
 	@Test
-	public void builder_Copy_mayBeNull() {
+	 void builder_Copy_mayBeNull() {
 		// given
 		Account.Builder builder = Account.Builder.builder((Account) null);
 		// when
@@ -176,7 +176,7 @@ public class AccountTest {
 	 * Builder creates empty optional on not all required fields are set.
 	 */
 	@Test
-	public void builder_optional_empty() {
+	 void builder_optional_empty() {
 		// given
 		Account.Builder builder = Account.Builder.builder((Account) null);
 		// when
@@ -189,7 +189,7 @@ public class AccountTest {
 	 * Builder creates filled optional on all required fields are set.
 	 */
 	@Test
-	public void builder_optional_filled() {
+	 void builder_optional_filled() {
 		// given
 		Account.Builder builder = Account.Builder.builder((Account) null);
 		builder.setId("an id");

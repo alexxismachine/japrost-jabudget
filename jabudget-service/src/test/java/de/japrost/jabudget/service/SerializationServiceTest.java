@@ -5,8 +5,8 @@ package de.japrost.jabudget.service;
 
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import de.japrost.jabudget.domain.account.Account;
@@ -27,7 +27,7 @@ public class SerializationServiceTest {
 
 	/**
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() {
 		serialization = Mockito.mock(Serialization.class);
 		accountRepository = Mockito.mock(AccountRepository.class);
@@ -38,7 +38,7 @@ public class SerializationServiceTest {
 	 * Delegate finding all values and passing them to serialization.
 	 */
 	@Test
-	public void serializeDelegates() {
+	 void serializeDelegates() {
 		// given
 		Mockito.when(accountRepository.findAll()).thenReturn(Set.of(accountFixtures.createDefault()));
 		// when
@@ -51,7 +51,7 @@ public class SerializationServiceTest {
 	 * Delegate loading all values and passing them for replacement.
 	 */
 	@Test
-	public void deserializeDelegates() {
+	 void deserializeDelegates() {
 		// given
 		// TODO use fixture
 		final DomainStore domainStore = new DomainStore();

@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Set;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.japrost.jabudget.domain.DomainException;
 import de.japrost.jabudget.domain.DomainFailure;
@@ -26,7 +26,7 @@ public class InMemoryAccountRepositoryTest implements AccountFixtureValues {
 	/**
 	 * Set up each test.
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() {
 		cut = new InMemoryAccountRepository();
 		defaultAccount = accountFixtures.createDefault();
@@ -38,7 +38,7 @@ public class InMemoryAccountRepositoryTest implements AccountFixtureValues {
 	 * @throws Exception never
 	 */
 	@Test
-	public void create_doesNotReturnGivenInstance() throws Exception {
+	 void create_doesNotReturnGivenInstance() throws Exception {
 		// given
 		// when
 		final Account actual = cut.create(defaultAccount);
@@ -53,7 +53,7 @@ public class InMemoryAccountRepositoryTest implements AccountFixtureValues {
 	 * @throws Exception never
 	 */
 	@Test
-	public void create_doesNotStoreGivenInstance() throws Exception {
+	 void create_doesNotStoreGivenInstance() throws Exception {
 		// given
 		// when
 		cut.create(defaultAccount);
@@ -69,7 +69,7 @@ public class InMemoryAccountRepositoryTest implements AccountFixtureValues {
 	 * @throws Exception never
 	 */
 	@Test
-	public void create_doesNotStoreDuplicates() throws Exception {
+	 void create_doesNotStoreDuplicates() throws Exception {
 		// given
 		cut.create(defaultAccount);
 		// when then
@@ -84,7 +84,7 @@ public class InMemoryAccountRepositoryTest implements AccountFixtureValues {
 	 * @throws Exception never
 	 */
 	@Test
-	public void update_updates() throws Exception {
+	 void update_updates() throws Exception {
 		// given
 		cut.create(defaultAccount);
 		defaultAccount.setName(ACCOUNT_ALT_NAME);
@@ -101,7 +101,7 @@ public class InMemoryAccountRepositoryTest implements AccountFixtureValues {
 	 * @throws Exception never
 	 */
 	@Test
-	public void update_doesNotStoreMissing() throws Exception {
+	 void update_doesNotStoreMissing() throws Exception {
 		// given
 		// when then
 		Assertions.assertThatExceptionOfType(DomainException.class).isThrownBy(() -> {
@@ -115,7 +115,7 @@ public class InMemoryAccountRepositoryTest implements AccountFixtureValues {
 	 * @throws Exception never
 	 */
 	@Test
-	public void replaceAll_replacesAll() throws Exception {
+	 void replaceAll_replacesAll() throws Exception {
 		// given
 		cut.create(defaultAccount);
 		// when

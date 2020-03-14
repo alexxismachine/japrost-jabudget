@@ -35,6 +35,7 @@ public class RestExceptionHandler {
 			case MISSING_ENTITY:
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			case ENTITY_NOT_AVAILABLE:
+				// TODO should that not be a NOT_FOUND also?
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			default:
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.nio.channels.FileChannel;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the {@link LazyFileInputStream}.
@@ -21,7 +21,7 @@ public class LazyFileInputStreamTest {
 	/**
 	 * Set cut with a file.
 	 */
-	@Before
+	@BeforeEach
 	public void initCut() {
 		final File file = new File("src/test/resources/LazyFile.txt");
 		cut = new LazyFileInputStream(file);
@@ -32,7 +32,7 @@ public class LazyFileInputStreamTest {
 	 *
 	 * @throws Exception never.
 	 */
-	@After
+	@AfterEach
 	public void closeCut() throws Exception {
 		cut.close();
 	}
@@ -43,7 +43,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testRead() throws Exception {
+	 void testRead() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -59,7 +59,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testRead_twice() throws Exception {
+	 void testRead_twice() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -76,7 +76,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testReadByteArray() throws Exception {
+	 void testReadByteArray() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		final byte[] bytes = new byte[5];
@@ -94,7 +94,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testReadByteArray_twice() throws Exception {
+	 void testReadByteArray_twice() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		final byte[] bytes = new byte[5];
@@ -113,7 +113,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testReadByteArrayOffset() throws Exception {
+	 void testReadByteArrayOffset() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		final byte[] bytes = new byte[5];
@@ -133,7 +133,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testReadByteArrayOffset_twice() throws Exception {
+	 void testReadByteArrayOffset_twice() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		final byte[] bytes = new byte[5];
@@ -154,7 +154,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testReadNBytes() throws Exception {
+	 void testReadNBytes() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		final byte[] bytes = new byte[18];
@@ -175,7 +175,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testReadNBytes_notOpening() throws Exception {
+	 void testReadNBytes_notOpening() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		final byte[] bytes = new byte[18];
@@ -196,7 +196,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testReadAllBytes() throws Exception {
+	 void testReadAllBytes() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -212,7 +212,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testReadAllBytes_notOpening() throws Exception {
+	 void testReadAllBytes_notOpening() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -229,7 +229,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testSkip() throws Exception {
+	 void testSkip() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -247,7 +247,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testSkip_notOpening() throws Exception {
+	 void testSkip_notOpening() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		cut.read();
@@ -266,7 +266,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testAvailable() throws Exception {
+	 void testAvailable() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -282,7 +282,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testAvailable_notOpening() throws Exception {
+	 void testAvailable_notOpening() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		cut.read();
@@ -299,7 +299,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testClose() throws Exception {
+	 void testClose() throws Exception {
 		// given
 		cut.read();
 		assertThat(cut.isOpen()).isTrue();
@@ -315,7 +315,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testGetChannel() throws Exception {
+	 void testGetChannel() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -331,7 +331,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testGetChannel_notOpening() throws Exception {
+	 void testGetChannel_notOpening() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		cut.read();
@@ -348,7 +348,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testGetFD() throws Exception {
+	 void testGetFD() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -364,7 +364,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testGetFD_notReopening() throws Exception {
+	 void testGetFD_notReopening() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		cut.read();
@@ -381,7 +381,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testTransferTo() throws Exception {
+	 void testTransferTo() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when
@@ -400,7 +400,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testTransferTo_notReopening() throws Exception {
+	 void testTransferTo_notReopening() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		cut.read();
@@ -419,7 +419,7 @@ public class LazyFileInputStreamTest {
 	 * @throws Exception never.
 	 */
 	@Test
-	public void testMulitClose() throws Exception {
+	 void testMulitClose() throws Exception {
 		// given
 		assertThat(cut.isOpen()).isFalse();
 		// when

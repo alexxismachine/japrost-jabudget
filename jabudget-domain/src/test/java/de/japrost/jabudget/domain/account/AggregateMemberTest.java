@@ -2,7 +2,7 @@ package de.japrost.jabudget.domain.account;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the {@link AggregateMember}.
@@ -23,7 +23,7 @@ public class AggregateMemberTest {
 	 * Same instances are equal.
 	 */
 	@Test
-	public void isEqualOnSame() {
+	 void isEqualOnSame() {
 		// given
 		// when
 		boolean actual = cut.equals(cut);
@@ -35,7 +35,7 @@ public class AggregateMemberTest {
 	 * Same instances are equal.
 	 */
 	@Test
-	public void isNotEqualOnOther() {
+	 void isNotEqualOnOther() {
 		// given
 		// when
 		boolean actual = cut.equals("");

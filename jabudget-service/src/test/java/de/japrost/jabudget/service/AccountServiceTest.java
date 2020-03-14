@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import de.japrost.jabudget.domain.DomainException;
@@ -29,7 +29,7 @@ public class AccountServiceTest implements AccountFixtureValues {
 	 *
 	 * @throws Exception on failure
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		accountRepository = Mockito.mock(AccountRepository.class);
 		cut = new AccountService(accountRepository);
@@ -41,7 +41,7 @@ public class AccountServiceTest implements AccountFixtureValues {
 	 * @throws DomainException never
 	 */
 	@Test
-	public void createDelegates() throws DomainException {
+	 void createDelegates() throws DomainException {
 		final Account expected = accountFixtures.createDefault();
 		Mockito.when(accountRepository.create(accountFixtures.createDefault())).thenReturn(expected);
 		// when
@@ -56,7 +56,7 @@ public class AccountServiceTest implements AccountFixtureValues {
 	 * @throws DomainException never
 	 */
 	@Test
-	public void updateDelegates() throws DomainException {
+	 void updateDelegates() throws DomainException {
 		final Account expected = accountFixtures.createDefault();
 		Mockito.when(accountRepository.update(accountFixtures.createDefault())).thenReturn(expected);
 		// when
@@ -69,7 +69,7 @@ public class AccountServiceTest implements AccountFixtureValues {
 	 * Simple delegation.
 	 */
 	@Test
-	public void retrieveAllDelegates() {
+	 void retrieveAllDelegates() {
 		final Account expected = accountFixtures.createDefault();
 		Mockito.when(accountRepository.findAll()).thenReturn(Set.of(expected));
 		// when
@@ -82,7 +82,7 @@ public class AccountServiceTest implements AccountFixtureValues {
 	 * Simple delegation.
 	 */
 	@Test
-	public void retrieveByIdDelegates() {
+	 void retrieveByIdDelegates() {
 		final Account expected = accountFixtures.createDefault();
 		Mockito.when(accountRepository.findById(ACCOUNT_DEF_ID)).thenReturn(Optional.of(expected));
 		// when
@@ -95,7 +95,7 @@ public class AccountServiceTest implements AccountFixtureValues {
 	 * Simple delegation.
 	 */
 	@Test
-	public void retrieveEraseDelegates() {
+	 void retrieveEraseDelegates() {
 		Mockito.when(accountRepository.delete(ACCOUNT_DEF_ID)).thenReturn(Boolean.TRUE);
 		// when
 		final Boolean actual = cut.erase(ACCOUNT_DEF_ID);
