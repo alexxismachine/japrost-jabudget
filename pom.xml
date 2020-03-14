@@ -7,7 +7,7 @@
   <parent>
     <groupId>de.japrost</groupId>
     <artifactId>japrost-java-parent</artifactId>
-    <version>11.0.3-SNAPSHOT</version>
+    <version>11.0.3</version>
   </parent>
 
   <groupId>de.japrost.jabudget</groupId>
@@ -32,9 +32,6 @@
 
   <properties>
     <japrost.site.locales>de</japrost.site.locales>
-    <!-- plugin versions -->
-    <version.maven-enforcer-plugin>3.0.0-M2</version.maven-enforcer-plugin>
-    <version.maven-surefire-plugin>3.0.0-M4</version.maven-surefire-plugin>
     <!-- dependency versions -->
     <spring.version>5.1.4.RELEASE</spring.version>
     <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
@@ -42,7 +39,6 @@
     <version.xstream>1.4.11</version.xstream>
     <!-- dependency versions test -->
     <version.servlet-api>4.0.1</version.servlet-api>
-    <version.junit>5.6.0</version.junit>
   </properties>
 
   <build>
@@ -58,14 +54,7 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${version.maven-surefire-plugin}</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>2.22.0</version>
         <executions>
           <execution>
             <goals>
@@ -78,7 +67,6 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.0.0</version>
         <executions>
           <execution>
             <id>add-test-source</id>
@@ -95,9 +83,7 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>${version.maven-enforcer-plugin}</version>
         <executions>
           <execution>
             <id>enforce-maven</id>
@@ -116,7 +102,6 @@
       </plugin>
     </plugins>
   </build>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -153,18 +138,6 @@
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
         <version>${version.servlet-api}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <version>${version.junit}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-params</artifactId>
-        <version>${version.junit}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
