@@ -1,5 +1,7 @@
 package de.japrost.jabudget.spring;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +16,9 @@ import de.japrost.jabudget.domain.DomainFailure;
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.domain.fixtures.account.AccountFixtureValues;
 import de.japrost.jabudget.domain.fixtures.account.AccountFixtures;
+import de.japrost.jabudget.rest.converter.Account2AccountResConverter;
+import de.japrost.jabudget.rest.converter.AccountRes2AccountConverter;
+import de.japrost.jabudget.rest.model.AccountRes;
 import de.japrost.jabudget.service.AccountService;
 
 /**
@@ -31,19 +36,20 @@ public class AccountControllerTest {
 	@BeforeEach
 	public void setUp() {
 		accountService = Mockito.mock(AccountService.class);
-		cut = new AccountController(accountService);
+		cut = new AccountController(accountService, new AccountRes2AccountConverter(), new Account2AccountResConverter());
 	}
 
 	/**
 	 * Simple delegation.
 	 */
 	@Test
-	 void retrieveAllDelegates() {
+	void retrieveAllDelegates() {
 		// given
+		// TODO add some objects.
 		final List<Account> result = new ArrayList<>();
 		Mockito.when(accountService.retrieveAll()).thenReturn(result);
 		// when
-		final List<Account> actual = cut.retrieveAll();
+		final List<AccountRes> actual = cut.retrieveAll();
 		//then
 		// TODO use a comparison not equal for domain objects.
 		Assertions.assertThat(actual).isEqualTo(result);
@@ -55,15 +61,16 @@ public class AccountControllerTest {
 	 * @throws DomainException never
 	 */
 	@Test
-	 void retrieveByIdDelegates() throws DomainException {
+	void retrieveByIdDelegates() throws DomainException {
 		// given
 		final Account account = accountFixtures.createDefault();
 		Mockito.when(accountService.retrieveById(AccountFixtureValues.ACCOUNT_DEF_ID)).thenReturn(Optional.of(account));
 		// when
-		final Account actual = cut.retrieveById(AccountFixtureValues.ACCOUNT_DEF_ID);
+		final AccountRes actual = cut.retrieveById(AccountFixtureValues.ACCOUNT_DEF_ID);
 		//then
 		// TODO use a comparison not equal for domain objects.
-		Assertions.assertThat(actual).isEqualTo(account);
+		assertThat(actual.getId()).isEqualTo(account.getId());
+		assertThat(actual.getName()).isEqualTo(account.getName());
 	}
 
 	/**
@@ -72,7 +79,7 @@ public class AccountControllerTest {
 	 * @throws DomainException never
 	 */
 	@Test
-	 void retrieveByIdFailsOnMissingEntity() throws DomainException {
+	void retrieveByIdFailsOnMissingEntity() throws DomainException {
 		// given
 		Mockito.when(accountService.retrieveById(AccountFixtureValues.ACCOUNT_DEF_ID))
 				.thenReturn(Optional.ofNullable(null));
@@ -92,7 +99,7 @@ public class AccountControllerTest {
 	 * @throws DomainException never
 	 */
 	@Test
-	 void createDelegates() throws DomainException {
+	void createDelegates() throws DomainException {
 		// given
 		final Account.Builder builder = accountFixtures.createDefaultBuilder();
 		final Account result = builder.build();
@@ -110,7 +117,7 @@ public class AccountControllerTest {
 	 * @throws DomainException never
 	 */
 	@Test
-	 void updateDelegates() throws DomainException {
+	void updateDelegates() throws DomainException {
 		// given
 		final Account.Builder builder = accountFixtures.createAlternateBuilder();
 		final Account result = accountFixtures.createDefault();
@@ -126,7 +133,7 @@ public class AccountControllerTest {
 	 * Simple delegation.
 	 */
 	@Test
-	 void deleteDelegates() {
+	void deleteDelegates() {
 		// given
 		// when
 		cut.delete(AccountFixtureValues.ACCOUNT_DEF_ID);

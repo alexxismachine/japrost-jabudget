@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExc
 
 import de.japrost.jabudget.domain.account.Account;
 import de.japrost.jabudget.domain.fixtures.account.AccountFixtures;
+import de.japrost.jabudget.rest.converter.Account2AccountResConverter;
+import de.japrost.jabudget.rest.converter.AccountRes2AccountConverter;
 import de.japrost.jabudget.service.AccountService;
 
 /**
@@ -31,10 +33,13 @@ public class AccountControllerIT {
 	 */
 	@BeforeEach
 	public void setup() {
+		Account2AccountResConverter accountRes2AccountConverter = new Account2AccountResConverter();
 		accountService = Mockito.mock(AccountService.class);
 		final ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver = new ExceptionHandlerExceptionResolver();
 		exceptionHandlerExceptionResolver.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
-		this.mockMvc = MockMvcBuilders.standaloneSetup(new AccountController(accountService))
+		this.mockMvc = MockMvcBuilders
+				.standaloneSetup(
+						new AccountController(accountService, new AccountRes2AccountConverter(), accountRes2AccountConverter))
 				.setHandlerExceptionResolvers(exceptionHandlerExceptionResolver).build();
 	}
 
@@ -44,7 +49,7 @@ public class AccountControllerIT {
 	 * @throws Exception never
 	 */
 	@Test
-	 void accounts_delegates() throws Exception {
+	void accounts_delegates() throws Exception {
 		// given
 		// when
 		mockMvc.perform(MockMvcRequestBuilders.get(PathMapping.BASE + PathMapping.ACCOUNTS));
@@ -58,7 +63,7 @@ public class AccountControllerIT {
 	 * @throws Exception never
 	 */
 	@Test
-	 void accounts_id_delegates() throws Exception {
+	void accounts_id_delegates() throws Exception {
 		// given
 		final Account account = accountFixtures.createDefault();
 		Mockito.when(accountService.retrieveById(account.getId())).thenReturn(Optional.of(account));

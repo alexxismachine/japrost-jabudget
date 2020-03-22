@@ -7,6 +7,15 @@
 * Docker verwenden
 * maven wrapper?
 
+=== Testing
+
+* Unit-Test
+** Nur die Klasse.
+* Integrationstests (über die Schichten eines Moduls)
+** Mocken bis max. Einstiegspunkt. Modul eigene Repositories nicht mocken. Fremde Repositories (REST-Calls) mocken.
+* End-2-End-Tests
+** Separate Projekte, die über das Frontend reingehen und auch im Repository validieren.
+
 === Domain
 
 * Zweite Entität (Entry (Buchung))
@@ -47,6 +56,7 @@
 
 * "Echtes" Rest (HATEOAS)
 * Konfigurierbarkeit der Pfade / Pfade über Konstanten bzw. Enums definieren.
+* Wie sind Converter einzustufen? Bean? Helper?
 
 === Vaadin Spring
 
