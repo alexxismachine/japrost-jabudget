@@ -1,0 +1,55 @@
+:title: JaBudget Domain - Java Programming Studio
+
+== JaBudget Domain
+ 
+JaBudget Domain definiert die Business Domain. 
+
+// Pro Domain-Objekt eine Validator-Klasse? -> javax.validation?
+
+// Separate Builder-Klasse?
+
+=== Domain-Objekte
+
+==== Entiäten
+
+Jede Entität hat eine eindeutige Identität (`id`) die das Objekt identifiziert.
+
+`equals()` und `hashCode()` basieren auf der `id`.
+
+==== Aggregate Member
+
+Aggregate Members sind Value-Objekte, die zusätzlich einen Schlüssel (`key`)
+haben, der der sie eindeutig identifiziert.
+Der Schlüssel wird aus der `id` des Aggregate-Root und einem `code` zusammengesetzt.
+
+`equals()` und `hashCode()` basieren auf dem `key`.
+
+=== Modell
+
+==== Account (Konto): Entität
+
+* Ein Account wird anhand seiner `id` identifiziert. 
+* Ein Account hat eine Währung (noch nicht modelliert).
+* Ein Account hat zu einem Datum einen Stand. (noch nicht modelliert).
+Anhand von Datum und Stand kann mit den Entries der Stand zu einem anderen Datum ermittelt werden.
+* Das Datum ist auf Mitternacht bezogen.
+* Alle Buchung des gleichen Datums erfolgen nach dem Stand des Kontos.
+
+// Entwicklen eines Comparators, der Instanzen findet, die die "gleichen" Felder aber eine andere id haben?
+
+// Verwenden einer AccountId-Klasse?
+
+==== Entry (Buchung): Aggregate Member
+
+* Ein Entry ist eine Buchung auf einem Account.
+(Zu einem Entry kann es einen "gegen Entry" geben, der auf dem "gegen Account" liegt.
+* Entry und gegen Entry sind unterschiedliche Entitäten (haben unterschiedliche id und AccountId)
+* Eine Beziehung zwischen beiden ist aktuell nicht vorgesehen.)
+* Ein Entry hat einen für das Konto eindeutigen Code (wie wird die Eindeutigkeit sicher gestellt?).
+* Ein Entry hat einen Betrag, der positiv oder negativ sein kann.
+* Der Betrag hat 2? Nachkommastellen.
+* Die Währung des Betrags eines Entries wird vom Account abegleitet (noch nicht modelliert)
+* Ein Entry hat eine Beschreibung (subject).
+* Ein Entry hat ein Valuta-Datum.
+* Ein Entry hat ein Buchungs-Datum.
+* Ein Entry hat _keinen_ Kontostand!

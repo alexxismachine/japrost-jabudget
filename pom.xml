@@ -39,6 +39,9 @@
     <version.xstream>1.4.11</version.xstream>
     <!-- dependency versions test -->
     <version.servlet-api>4.0.1</version.servlet-api>
+    <!-- dependency versions plugins -->
+    <version.asciidoctor-maven-plugin>1.6.0</version.asciidoctor-maven-plugin>
+    <version.asciidoctorj-diagram>1.5.18</version.asciidoctorj-diagram>
   </properties>
 
   <build>
@@ -96,6 +99,83 @@
                   <version>3.5</version>
                 </requireMavenVersion>
               </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <asciidoc>
+            <!--
+              <requires>
+              <require>asciidoctor-diagram</require>
+              </requires>
+            -->
+            <attributes>
+              <source-highlighter>coderay</source-highlighter>
+              <coderay-css>style</coderay-css>
+            </attributes>
+          </asciidoc>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctor-maven-plugin</artifactId>
+            <version>${version.asciidoctor-maven-plugin}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>${version.asciidoctor-maven-plugin}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-diagram</artifactId>
+            <version>${version.asciidoctorj-diagram}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <backend>html5</backend>
+          <attributes>
+            <adoc_src>src/doc/asciidoc</adoc_src>
+            <re_adoc_src>../../..</re_adoc_src>
+            <java_src>src/main/java</java_src>
+            <re_java_src>../../..</re_java_src>
+            <site_src>src/site/asciidoc</site_src>
+            <re_site_src>../../..</re_site_src>
+            <!-- local version to go beyond basic languages -->
+            <highlightjsdir>lib/highlight</highlightjsdir>
+            <!-- explore here https://highlightjs.org/static/demo/ -->
+            <highlightjs-theme>atom-one-light</highlightjs-theme>
+            <toc>left</toc>
+            <toclevels>3</toclevels>
+            <icons>font</icons>
+            <sectanchors>true</sectanchors>
+            <idprefix /><!-- set the idprefix to blank -->
+            <idseparator>-</idseparator>
+            <doctype>book</doctype>
+            <docinfo1>true</docinfo1>
+            <sectnums>true</sectnums>
+            <revnumber>${project.version}</revnumber>
+            <revdate>${maven.build.timestamp}</revdate>
+          </attributes>
+          <requires>
+            <require>asciidoctor-diagram</require>
+          </requires>
+          <sourceHighlighter>highlight.js</sourceHighlighter>
+        </configuration>
+        <executions>
+          <execution>
+            <id>overview</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <sourceDirectory>${basedir}/src/doc/asciidoc</sourceDirectory>
             </configuration>
           </execution>
         </executions>

@@ -1,0 +1,14 @@
+= JaBudget Development
+alexxismachine
+:title:  Development - JaBudget - Java Programming Studio
+
+This document shows what is developed how and why.
+
+= Modules
+
+include::{re_adoc_src}/jabudget-domain/{site_src}/index.adoc[]
+
+= Appendix 
+
+include::{re_adoc_src}/{site_src}/backlog.adoc[]
+
