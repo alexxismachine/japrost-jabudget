@@ -101,14 +101,16 @@ public class AccountControllerTest {
 	@Test
 	void createDelegates() throws DomainException {
 		// given
-		final Account.Builder builder = accountFixtures.createDefaultBuilder();
-		final Account result = builder.build();
-		Mockito.when(accountService.create(Mockito.any(Account.class))).thenReturn(result);
+		AccountRes accountRes = new AccountRes();
+		final Account account = accountFixtures.createDefault();
+		accountRes.setId(account.getId());
+		accountRes.setName(account.getId());
+		Mockito.when(accountService.create(Mockito.any(Account.class))).thenReturn(account);
 		// when
-		final Account actual = cut.create(builder);
+		final AccountRes actual = cut.create(accountRes);
 		//then
-		// TODO use a comparison not equal for domain objects.
-		Assertions.assertThat(actual).isEqualTo(result);
+		assertThat(actual.getId()).isEqualTo(account.getId());
+		assertThat(actual.getName()).isEqualTo(account.getName());
 	}
 
 	/**
@@ -119,14 +121,16 @@ public class AccountControllerTest {
 	@Test
 	void updateDelegates() throws DomainException {
 		// given
-		final Account.Builder builder = accountFixtures.createAlternateBuilder();
-		final Account result = accountFixtures.createDefault();
-		Mockito.when(accountService.update(Mockito.any())).thenReturn(result);
+		AccountRes accountRes = new AccountRes();
+		final Account account = accountFixtures.createDefault();
+		accountRes.setId(account.getId());
+		accountRes.setName(account.getId());
+		Mockito.when(accountService.update(Mockito.any(Account.class))).thenReturn(account);
 		// when
-		final Account actual = cut.update(AccountFixtureValues.ACCOUNT_DEF_ID, builder);
+		final AccountRes actual = cut.update(AccountFixtureValues.ACCOUNT_DEF_ID, accountRes);
 		//then
-		// TODO use a comparison not equal for domain objects.
-		Assertions.assertThat(actual).isEqualTo(result);
+		assertThat(actual.getId()).isEqualTo(account.getId());
+		assertThat(actual.getName()).isEqualTo(account.getName());
 	}
 
 	/**

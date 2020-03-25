@@ -93,8 +93,10 @@ public class AccountController {
 	 * @throws DomainException if creating fails
 	 */
 	@PostMapping(path = ACCOUNTS, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Account create(@RequestBody final Account.Builder account) throws DomainException {
-		return accountService.create(account.build());
+	public AccountRes create(@RequestBody final AccountRes account) throws DomainException {
+		var accountRequest = accountRes2AccountConverter.convert(account);
+		var newAccount = accountService.create(accountRequest);
+		return account2AccountResConverter.convert(newAccount);
 	}
 
 	/**
@@ -107,10 +109,12 @@ public class AccountController {
 	 */
 	@PutMapping(path = ACCOUNTS_ID, consumes = MediaType.APPLICATION_JSON_VALUE)
 	// TODO use HTTP UPDATE?
-	public Account update(@PathVariable(ID_PARAM) final String id, @RequestBody final Account.Builder account)
+	public AccountRes update(@PathVariable(ID_PARAM) final String id, @RequestBody final AccountRes account)
 			throws DomainException {
 		account.setId(id);
-		return accountService.update(account.build());
+		var accountRequest = accountRes2AccountConverter.convert(account);
+		var newAccount = accountService.update(accountRequest);
+		return account2AccountResConverter.convert(newAccount);
 	}
 
 	/**

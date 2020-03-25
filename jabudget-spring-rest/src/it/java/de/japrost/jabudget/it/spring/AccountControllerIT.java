@@ -1,4 +1,4 @@
-package de.japrost.jabudget.spring;
+package de.japrost.jabudget.it.spring;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -18,6 +18,8 @@ import de.japrost.jabudget.domain.fixtures.account.AccountFixtures;
 import de.japrost.jabudget.rest.converter.Account2AccountResConverter;
 import de.japrost.jabudget.rest.converter.AccountRes2AccountConverter;
 import de.japrost.jabudget.service.AccountService;
+import de.japrost.jabudget.spring.AccountController;
+import de.japrost.jabudget.spring.PathMapping;
 
 /**
  * Test the {@link AccountController}.
